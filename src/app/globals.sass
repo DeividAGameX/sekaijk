@@ -1,0 +1,459 @@
+@tailwind base
+@tailwind components
+@tailwind utilities
+
+@import "/assets/IconFont/style.css"
+
+/* Importar las fuentes locales de Lato */
+@font-face
+    font-family: "Lato"
+    src: url("/fonts/Lato-Regular.ttf") format("truetype")
+    font-weight: 400
+    font-style: normal
+
+@font-face
+    font-family: "Lato"
+    src: url("/fonts/Lato-Bold.ttf") format("truetype")
+    font-weight: 700
+    font-style: normal
+
+@font-face
+    font-family: "Lato"
+    src: url("/fonts/Lato-Italic.ttf") format("truetype")
+    font-weight: 400
+    font-style: italic
+
+@font-face
+    font-family: "Roboto"
+    src: url("/fonts/Roboto-Regular.ttf") format("truetype")
+    font-weight: 400
+    font-style: normal
+
+@font-face
+    font-family: "Roboto"
+    src: url("/fonts/Roboto-Bold.ttf") format("truetype")
+    font-weight: 700
+    font-style: normal
+
+@font-face
+    font-family: "Roboto"
+    src: url("/fonts/Roboto-Italic.ttf") format("truetype")
+    font-weight: 400
+    font-style: italic
+
+:root
+    --primary: #ff0f80
+    --secondary: #c6baa8
+    --primary-body: #121212
+    --secondary-body: #1f1f1f
+    --secondary-red: #ff6f61
+    --coral: #f2786d
+    --light-gray: #eaeaea
+    --medium-gray: #a9a9a9
+    --dark-gray: #303030
+    --neutral-gray: #4b4b4b
+    --golden-yellow: #d1b53b
+    --teal-green: #2a9d8f
+    --white-text: #ffffff
+    --text-jk: #ff0f80
+    --text-hit-jk: #bf226b
+    --text-hint-jk: #616161
+    --bg-transparent: rgba($color: #121212, $alpha: 0.5)
+    --bg-img: "/assets/FondoPortada.jpg"
+
+@media (prefers-color-scheme: dark)
+    :root
+        --background: #0a0a0a
+        --foreground: #ededed
+        --background-op: rgba(10, 10, 10, 0.85)
+
+body
+    color: var(--foreground)
+    background: var(--background)
+    font-family: "Roboto"
+
+.bodyPost
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6
+        font-family: "Lato", sans-serif
+        @apply leading-relaxed
+
+    h1
+        font-size: 3rem
+        font-weight: 700 /* Negrita en títulos principales */
+
+    h2
+        font-size: 2.5rem
+        font-weight: 700
+
+    h3
+        font-size: 2rem
+        font-weight: 700
+
+    h4
+        font-size: 1.75rem
+        font-weight: 700
+
+    h5
+        font-size: 1.5rem
+        font-weight: 700
+
+    h6
+        font-size: 1.25rem
+        font-weight: 700
+
+    /* Estilos para los párrafos */
+    p
+        font-size: 1rem
+        font-family: "Roboto"
+        @apply my-2 leading-relaxed
+
+    ul, ol
+        margin: 0 0 1em 1.5em
+        padding: 0
+
+    li
+        margin: 0.5em 0
+
+    code
+        font-family: 'Courier New', monospace
+        font-size: 0.9em
+        background-color: #f4f4f4
+        padding: 0.1em 0.3em
+        border-radius: 3px
+
+    pre
+        font-family: 'Courier New', monospace
+        font-size: 0.9em
+        background-color: #f4f4f4
+        padding: 1em
+        border-radius: 3px
+        overflow-x: auto
+
+    strong
+        font-weight: bold
+
+    em
+        font-style: italic
+
+    u
+        text-decoration: underline
+
+    hr
+        border: none
+        border-top: 1px solid #ddd
+        margin: 1em 0
+
+.content-jk
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6
+        font-family: "Lato", sans-serif
+        @apply leading-relaxed
+
+    h1
+        font-size: 3rem
+        font-weight: 700 /* Negrita en títulos principales */
+
+    h2
+        font-size: 2.5rem
+        font-weight: 700
+
+    h3
+        font-size: 2rem
+        font-weight: 700
+
+    h4
+        font-size: 1.75rem
+        font-weight: 700
+
+    h5
+        font-size: 1.5rem
+        font-weight: 700
+
+    h6
+        font-size: 1.25rem
+        font-weight: 700
+
+    /* Estilos para los párrafos */
+    p
+        font-size: 1rem
+        font-family: "Roboto"
+        @apply my-2 leading-relaxed
+
+    ul, ol
+        margin: 0 0 1em 1.5em
+        padding: 0
+
+    ol
+        list-style: decimal
+
+    ul
+        list-style: outside
+
+    li
+        margin: 0.5em 0
+
+    code
+        font-family: 'Courier New', monospace
+        font-size: 0.9em
+        background-color: #f4f4f4
+        padding: 0.1em 0.3em
+        border-radius: 3px
+
+    pre
+        font-family: 'Courier New', monospace
+        font-size: 0.9em
+        background-color: #f4f4f4
+        padding: 1em
+        border-radius: 3px
+        overflow-x: auto
+
+    strong
+        font-weight: bold
+
+    em
+        font-style: italic
+
+    u
+        text-decoration: underline
+
+    hr
+        border: none
+        border-top: 1px solid #ddd
+        margin: 1em 0
+
+    table
+        border-collapse: collapse
+        width: 100%
+        margin-bottom: 1em
+
+        th, td
+            padding: 0.5em
+            border: 1px solid #ddd
+
+        th
+            background-color: #f5f5f5
+
+.tabla-jk
+    .ant-table-wrapper
+        height: 100%
+
+        .ant-spin-nested-loading
+            height: 100%
+
+            .ant-spin-container
+                height: 100%
+                display: flex
+                flex-direction: column
+
+                .ant-table
+                    height: 100%
+                    overflow: auto
+                    table
+                        min-width: 500px
+
+        &-container
+            height: 100%
+
+            &-body
+                height: 100%
+                overflow: auto !important
+
+.tabla-jk-transparent
+    .ant-table-wrapper
+        .ant-spin-nested-loading
+            .ant-spin-container
+                .ant-table
+                    th
+                        background-color: transparent
+
+.profile-post
+    width: 100%
+    height: 100%
+    display: flex
+    overflow: hidden
+    .ant-tabs
+        width: 100%
+        height: 100%
+        flex: 1
+        display: flex
+        overflow: auto
+        .ant-tabs-content-holder
+            width: 100%
+            height: 100%
+            overflow: auto
+            flex: 1
+            display: flex
+            max-width: 100%
+            .ant-tabs-content
+                overflow: auto
+                flex: 1
+
+.postEditor
+    width: 100%
+    height: 100%
+    overflow: auto
+    .tiptap
+        width: 100%
+        height: auto
+        outline: none !important
+        overflow: auto
+
+        ul, ol
+            list-style-type: disc
+            margin-block-start: 1em
+            margin-block-end: 1em
+            margin-inline-start: 0
+            margin-inline-end: 0
+            padding-inline-start: 40px
+
+        li
+            margin-bottom: 0.5em
+
+        ol
+            list-style-type: decimal
+
+.dashboardLayout
+    .ant-layout-sider
+        background-color: transparent !important
+        // @apply px-4 py-5
+        padding: 15px 20px
+        // transition: background-color 1000ms linear
+
+        .ant-layout-sider-children
+            background-color: var(--primary-body)
+            // background-color: transparent
+            padding: 5px 10px
+            border-radius: 15px
+            overflow: hidden
+
+            .ant-divider
+                padding-inline: 50px !important
+
+            .ant-menu
+                background-color: transparent !important
+
+                .ant-menu-item
+                    position: relative
+
+                .ant-menu-item-selected
+                    background-color: --secondary-body
+
+    .ant-layout-sider-collapsed
+        padding: 15px 25px
+        transition: background-color 1000ms linear
+        border-right: none !important
+        transition: all 0.5s ease-in-out
+        .ant-layout-sider-children
+            background-color: var(--primary-body)
+            border-radius: 50px
+
+    .dashboardContent
+        height: 100%
+        display: flex
+        position: relative
+        flex-direction: column
+        overflow: hidden auto
+
+        .ant-layout-header
+            background-color: var(--background)
+            top: 5px
+            position: sticky
+            padding: 0px 25px
+            margin-right: 20px
+            border-radius: 20px
+
+            .dashboard-title
+                width: calc(100% - 48px)
+
+        .ant-layout-content
+            min-height: calc(100vh - 96px)
+            margin: 0 auto
+            padding-bottom: 10px
+            width: 100%
+            max-width: min(100% - 1em, 1600px)
+            flex: 1
+            position: relative
+        .ant-image
+            height: 100%
+
+.publicDrawer
+    background-color: var(--background) !important
+    color: white !important
+    a
+        color: white !important
+
+.dashboardDrawer
+    background-color: var(--background) !important
+
+    .ant-menu
+        background-color: transparent !important
+
+        .ant-menu-item
+            position: relative
+
+        .ant-menu-item-selected
+            background-color: --secondary-body
+
+.dashboard-submenu
+    background-color: var(--primary-body) !important
+    .ant-menu
+        background-color: var(--primary-body) !important
+
+@media (max-width: 1024px)
+    .dashboardLayout
+        .ant-layout-sider
+            padding: 0px
+
+            .ant-layout-sider-children
+                padding: 0px
+
+        .ant-layout-sider-collapsed
+            padding: 0px 0px
+
+        .dashboardContent
+            .ant-layout-header
+                margin-inline: 15px
+
+            .ant-layout-content
+                @apply px-3
+
+@media (max-width: 768px)
+    /* Estilos para móviles y tablets */
+    .dashboardLayout
+        .ant-layout-sider
+            padding: 0px
+
+        .ant-layout-sider-collapsed
+            padding: 0px 0px
+
+        .ant-layout-header
+            padding: 0 5px
+
+            .ant-badge
+                display: none
+
+@media (max-width: 640px)
+    /* Estilos para móviles y tablets */
+    .dashboardLayout
+        .ant-layout-sider
+            padding: 0px
+
+        .ant-layout-sider-collapsed
+            padding: 0px 0px
+
+/* Tema personalizado para Quill */
+
+.file-system-modal-root
+    .ant-image
+        height: 100%
+        img
+            height: 100%

@@ -1,0 +1,124 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id             Int              @id @default(autoincrement())
+  name           String           @unique
+  email          String           @unique
+  password       String
+  avatar         String
+  banner         String?
+  description    String?
+  slug           String?
+  rolesId        Int
+  isPublic       Boolean          @default(false)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @default(now()) @updatedAt
+  Posts          Posts[]
+  Roles          Roles            @relation(fields: [rolesId], references: [id])
+  social         social[]
+  UsersResources UsersResources[]
+}
+
+model social {
+  id     Int    @id @default(autoincrement())
+  icon   String
+  url    String
+  userId Int
+  user   Users  @relation(fields: [userId], references: [id])
+}
+
+model Roles {
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  users       Users[]
+  Permissions Permissions[]
+}
+
+model Permissions {
+  id          Int    @id @default(autoincrement())
+  name        String
+  permissions String
+  roleId      Int
+  role        Roles  @relation(fields: [roleId], references: [id])
+}
+
+model Posts {
+  id          Int         @id @default(autoincrement())
+  title       String
+  banner      String?
+  description String
+  content     String?
+  slug        String?
+  draft       Int?
+  status      PostsStatus @default(DRAFT)
+  authorId    Int
+  categoryId  Int?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @default(now()) @updatedAt
+  author      Users       @relation(fields: [authorId], references: [id])
+  Categories  Categories? @relation(fields: [categoryId], references: [id])
+  Tags        Tags[]
+}
+
+model Categories {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String
+  slug        String
+  createdAt   DateTime @default(now())
+  posts       Posts[]
+}
+
+model Tags {
+  id          Int     @id @default(autoincrement())
+  name        String  @unique
+  color       String
+  description String
+  posts       Posts[]
+}
+
+model UsersResources {
+  id         Int          @id @default(autoincrement())
+  name       String
+  userId     Int
+  resourceId String
+  url        String
+  type       ResourceType @default(IMAGE)
+  user       Users        @relation(fields: [userId], references: [id])
+}
+
+model YtVideos {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  thumbnail   String
+  publishedAt DateTime
+  videoId     String
+  type_video  Int
+}
+
+enum PostsStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum ResourceType {
+  VIDEO
+  AUDIO
+  DOCUMENT
+  IMAGE
+}

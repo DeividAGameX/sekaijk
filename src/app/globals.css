@@ -1,0 +1,471 @@
+@charset "UTF-8";
+@import "/assets/IconFont/style.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Importar las fuentes locales de Lato */
+@font-face {
+  font-family: "Lato";
+  src: url("/fonts/Lato-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Lato";
+  src: url("/fonts/Lato-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Lato";
+  src: url("/fonts/Lato-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/Roboto-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/Roboto-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/Roboto-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+:root {
+  --primary: #ff0f80;
+  --secondary: #c6baa8;
+  --primary-body: #121212;
+  --secondary-body: #1f1f1f;
+  --secondary-red: #ff6f61;
+  --coral: #f2786d;
+  --light-gray: #eaeaea;
+  --medium-gray: #a9a9a9;
+  --dark-gray: #303030;
+  --neutral-gray: #4b4b4b;
+  --golden-yellow: #d1b53b;
+  --teal-green: #2a9d8f;
+  --white-text: #ffffff;
+  --text-jk: #ff0f80;
+  --text-hit-jk: #bf226b;
+  --text-hint-jk: #616161;
+  --bg-transparent: rgba($color: #121212, $alpha: 0.5);
+  --bg-img: "/assets/FondoPortada.jpg";
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --background-op: rgba(10, 10, 10, 0.85);
+  }
+}
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: "Roboto";
+}
+
+.bodyPost {
+  /* Estilos para los párrafos */
+}
+.bodyPost h1,
+.bodyPost h2,
+.bodyPost h3,
+.bodyPost h4,
+.bodyPost h5,
+.bodyPost h6 {
+  font-family: "Lato", sans-serif;
+  @apply leading-relaxed;
+}
+.bodyPost h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+.bodyPost h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+.bodyPost h3 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+.bodyPost h4 {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+.bodyPost h5 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.bodyPost h6 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.bodyPost p {
+  font-size: 1rem;
+  font-family: "Roboto";
+  @apply my-2 leading-relaxed;
+}
+.bodyPost ul, .bodyPost ol {
+  margin: 0 0 1em 1.5em;
+  padding: 0;
+}
+.bodyPost li {
+  margin: 0.5em 0;
+}
+.bodyPost code {
+  font-family: "Courier New", monospace;
+  font-size: 0.9em;
+  background-color: #f4f4f4;
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+.bodyPost pre {
+  font-family: "Courier New", monospace;
+  font-size: 0.9em;
+  background-color: #f4f4f4;
+  padding: 1em;
+  border-radius: 3px;
+  overflow-x: auto;
+}
+.bodyPost strong {
+  font-weight: bold;
+}
+.bodyPost em {
+  font-style: italic;
+}
+.bodyPost u {
+  text-decoration: underline;
+}
+.bodyPost hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 1em 0;
+}
+
+.content-jk {
+  /* Estilos para los párrafos */
+}
+.content-jk h1,
+.content-jk h2,
+.content-jk h3,
+.content-jk h4,
+.content-jk h5,
+.content-jk h6 {
+  font-family: "Lato", sans-serif;
+  @apply leading-relaxed;
+}
+.content-jk h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+.content-jk h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+.content-jk h3 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+.content-jk h4 {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+.content-jk h5 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.content-jk h6 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.content-jk p {
+  font-size: 1rem;
+  font-family: "Roboto";
+  @apply my-2 leading-relaxed;
+}
+.content-jk ul, .content-jk ol {
+  margin: 0 0 1em 1.5em;
+  padding: 0;
+}
+.content-jk ol {
+  list-style: decimal;
+}
+.content-jk ul {
+  list-style: outside;
+}
+.content-jk li {
+  margin: 0.5em 0;
+}
+.content-jk code {
+  font-family: "Courier New", monospace;
+  font-size: 0.9em;
+  background-color: #f4f4f4;
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+.content-jk pre {
+  font-family: "Courier New", monospace;
+  font-size: 0.9em;
+  background-color: #f4f4f4;
+  padding: 1em;
+  border-radius: 3px;
+  overflow-x: auto;
+}
+.content-jk strong {
+  font-weight: bold;
+}
+.content-jk em {
+  font-style: italic;
+}
+.content-jk u {
+  text-decoration: underline;
+}
+.content-jk hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 1em 0;
+}
+.content-jk table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1em;
+}
+.content-jk table th, .content-jk table td {
+  padding: 0.5em;
+  border: 1px solid #ddd;
+}
+.content-jk table th {
+  background-color: #f5f5f5;
+}
+
+.tabla-jk .ant-table-wrapper {
+  height: 100%;
+}
+.tabla-jk .ant-table-wrapper .ant-spin-nested-loading {
+  height: 100%;
+}
+.tabla-jk .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.tabla-jk .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table {
+  height: 100%;
+  overflow: auto;
+}
+.tabla-jk .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table table {
+  min-width: 500px;
+}
+.tabla-jk .ant-table-wrapper-container {
+  height: 100%;
+}
+.tabla-jk .ant-table-wrapper-container-body {
+  height: 100%;
+  overflow: auto !important;
+}
+
+.tabla-jk-transparent .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table th {
+  background-color: transparent;
+}
+
+.profile-post {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+.profile-post .ant-tabs {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  display: flex;
+  overflow: auto;
+}
+.profile-post .ant-tabs .ant-tabs-content-holder {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  flex: 1;
+  display: flex;
+  max-width: 100%;
+}
+.profile-post .ant-tabs .ant-tabs-content-holder .ant-tabs-content {
+  overflow: auto;
+  flex: 1;
+}
+
+.postEditor {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+.postEditor .tiptap {
+  width: 100%;
+  height: auto;
+  outline: none !important;
+  overflow: auto;
+}
+.postEditor .tiptap ul, .postEditor .tiptap ol {
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-inline-start: 40px;
+}
+.postEditor .tiptap li {
+  margin-bottom: 0.5em;
+}
+.postEditor .tiptap ol {
+  list-style-type: decimal;
+}
+
+.dashboardLayout .ant-layout-sider {
+  background-color: transparent !important;
+  padding: 15px 20px;
+}
+.dashboardLayout .ant-layout-sider .ant-layout-sider-children {
+  background-color: var(--primary-body);
+  padding: 5px 10px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+.dashboardLayout .ant-layout-sider .ant-layout-sider-children .ant-divider {
+  padding-inline: 50px !important;
+}
+.dashboardLayout .ant-layout-sider .ant-layout-sider-children .ant-menu {
+  background-color: transparent !important;
+}
+.dashboardLayout .ant-layout-sider .ant-layout-sider-children .ant-menu .ant-menu-item {
+  position: relative;
+}
+.dashboardLayout .ant-layout-sider .ant-layout-sider-children .ant-menu .ant-menu-item-selected {
+  background-color: --secondary-body;
+}
+.dashboardLayout .ant-layout-sider-collapsed {
+  padding: 15px 25px;
+  transition: background-color 1000ms linear;
+  border-right: none !important;
+  transition: all 0.5s ease-in-out;
+}
+.dashboardLayout .ant-layout-sider-collapsed .ant-layout-sider-children {
+  background-color: var(--primary-body);
+  border-radius: 50px;
+}
+.dashboardLayout .dashboardContent {
+  height: 100%;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  overflow: hidden auto;
+}
+.dashboardLayout .dashboardContent .ant-layout-header {
+  background-color: var(--background);
+  top: 5px;
+  position: sticky;
+  padding: 0px 25px;
+  margin-right: 20px;
+  border-radius: 20px;
+}
+.dashboardLayout .dashboardContent .ant-layout-header .dashboard-title {
+  width: calc(100% - 48px);
+}
+.dashboardLayout .dashboardContent .ant-layout-content {
+  min-height: calc(100vh - 96px);
+  margin: 0 auto;
+  padding-bottom: 10px;
+  width: 100%;
+  max-width: min(100% - 1em, 1600px);
+  flex: 1;
+  position: relative;
+}
+.dashboardLayout .dashboardContent .ant-image {
+  height: 100%;
+}
+
+.publicDrawer {
+  background-color: var(--background) !important;
+  color: white !important;
+}
+.publicDrawer a {
+  color: white !important;
+}
+
+.dashboardDrawer {
+  background-color: var(--background) !important;
+}
+.dashboardDrawer .ant-menu {
+  background-color: transparent !important;
+}
+.dashboardDrawer .ant-menu .ant-menu-item {
+  position: relative;
+}
+.dashboardDrawer .ant-menu .ant-menu-item-selected {
+  background-color: --secondary-body;
+}
+
+.dashboard-submenu {
+  background-color: var(--primary-body) !important;
+}
+.dashboard-submenu .ant-menu {
+  background-color: var(--primary-body) !important;
+}
+
+@media (max-width: 1024px) {
+  .dashboardLayout .ant-layout-sider {
+    padding: 0px;
+  }
+  .dashboardLayout .ant-layout-sider .ant-layout-sider-children {
+    padding: 0px;
+  }
+  .dashboardLayout .ant-layout-sider-collapsed {
+    padding: 0px 0px;
+  }
+  .dashboardLayout .dashboardContent .ant-layout-header {
+    margin-inline: 15px;
+  }
+  .dashboardLayout .dashboardContent .ant-layout-content {
+    @apply px-3;
+  }
+}
+@media (max-width: 768px) {
+  /* Estilos para móviles y tablets */
+  .dashboardLayout .ant-layout-sider {
+    padding: 0px;
+  }
+  .dashboardLayout .ant-layout-sider-collapsed {
+    padding: 0px 0px;
+  }
+  .dashboardLayout .ant-layout-header {
+    padding: 0 5px;
+  }
+  .dashboardLayout .ant-layout-header .ant-badge {
+    display: none;
+  }
+}
+@media (max-width: 640px) {
+  /* Estilos para móviles y tablets */
+  .dashboardLayout .ant-layout-sider {
+    padding: 0px;
+  }
+  .dashboardLayout .ant-layout-sider-collapsed {
+    padding: 0px 0px;
+  }
+}
+/* Tema personalizado para Quill */
+.file-system-modal-root .ant-image {
+  height: 100%;
+}
+.file-system-modal-root .ant-image img {
+  height: 100%;
+}/*# sourceMappingURL=globals.css.map */

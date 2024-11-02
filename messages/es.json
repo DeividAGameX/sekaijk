@@ -1,0 +1,415 @@
+{
+    "api": {
+        "errors": {
+            "error": "Error desconocido",
+            "allowed": "No tienes permiso para realizar esta acción",
+            "access_token": "Se requiere un token de autenticación",
+            "user_not_found": "Acceso denegado",
+            "uniqueConstraintFailed": "Ya existe un registro con estos valores",
+            "nullConstraintFailed": "Uno de los valores no puede ser nulo",
+            "uniqueConstraintViolation": "Ya existe un registro con estos valores",
+            "foreignKeyConstraintFailed": "No se pudo encontrar el registro relacionado",
+            "generalError": "Error general al interactuar con la base de datos",
+            "integrityConstraintViolation": "Violación de integridad de datos",
+            "serializationFailure": "Error de serialización",
+            "timeout": "Tiempo de espera agotado",
+            "connectionTimeout": "Tiempo de espera de conexión agotado",
+            "connectionFailure": "Error de conexión a la base de datos",
+            "undefinedTable": "Tabla no definida",
+            "undefinedColumn": "Columna no definida",
+            "duplicateKeyValue": "Valor de clave duplicado",
+            "foreignKeyViolation": "Violación de clave foránea",
+            "invalidTextRepresentation": "Representación de texto inválida",
+            "notNullViolation": "Violación de NOT NULL",
+            "stringDataRightTruncation": "Truncamiento de datos de cadena a la derecha",
+            "numericValueOutOfRange": "Valor numérico fuera de rango"
+        },
+        "prisma": {
+            "uniqueConstraintFailed": "Ya existe un registro con estos valores",
+            "nullConstraintFailed": "Uno de los valores no puede ser nulo",
+            "uniqueConstraintViolation": "Ya existe un registro con estos valores",
+            "foreignKeyConstraintFailed": "No se pudo encontrar el registro relacionado",
+            "generalError": "Error general al interactuar con la base de datos",
+            "integrityConstraintViolation": "Violación de integridad de datos",
+            "serializationFailure": "Error de serialización",
+            "timeout": "Tiempo de espera agotado",
+            "connectionTimeout": "Tiempo de espera de conexión agotado",
+            "connectionFailure": "Error de conexión a la base de datos",
+            "undefinedTable": "Tabla no definida",
+            "undefinedColumn": "Columna no definida",
+            "duplicateKeyValue": "Valor de clave duplicado",
+            "foreignKeyViolation": "Violación de clave foránea",
+            "invalidTextRepresentation": "Representación de texto inválida",
+            "notNullViolation": "Violación de NOT NULL",
+            "stringDataRightTruncation": "Truncamiento de datos de cadena a la derecha",
+            "numericValueOutOfRange": "Valor numérico fuera de rango"
+        }
+    },
+    "auth": {
+        "errors": {
+            "invalid_credentials": "Credenciales invalidas",
+            "account_not_found": "Cuenta no encontrada",
+            "email_not_found": "Email no encontrada",
+            "account_locked": "Cuenta bloqueada",
+            "invalid_verification_code": "Código de verificación inválido",
+            "invalid_password": "Contraseña inválida"
+        },
+        "form": {
+            "username": "Nombre de usuario",
+            "email": "Correo electrónico",
+            "password": "Contraseña",
+            "confirm_password": "Confirmar contraseña",
+            "remember_me": "Guardar sesión",
+            "login": "Iniciar sesión",
+            "forgot_password": "¿Olvidaste tu contraseña?",
+            "reset_password": "Restablecer contraseña",
+            "sign_up": "Regístrate",
+            "sign_in": "Inicia sesión",
+            "or": "o",
+            "verification_code": "Código de verificación",
+            "send_verification_code": "Enviar código de verificación",
+            "reset_password_success": "Contraseña restablecida con éxito",
+            "reset_password_error": "No se pudo restablecer la contraseña",
+            "account_exists": "Cuenta ya existe",
+            "email_exists": "Este correo electrónico ya está en uso",
+            "sign_in_working": "Iniciando sesión...",
+            "errors": {
+                "username_required": "El nombre de usuario es obligatorio",
+                "username_min_length": "El nombre de usuario debe tener al menos 6 caracteres",
+                "username_max_length": "El nombre de usuario no puede exceder los 30 caracteres",
+                "username_invalid_characters": "El nombre de usuario solo puede contener letras, números, y el carácter de subrayado",
+                "email_required": "El correo electrónico es obligatorio",
+                "email_invalid": "El correo electrónico no es válido",
+                "password_required": "La contraseña es obligatoria",
+                "password_min_length": "La contraseña debe tener al menos 8 caracteres",
+                "password_max_length": "La contraseña no puede exceder los 20 caracteres"
+            }
+        }
+    },
+    "social": {
+        "items": {
+            "faFacebook": "Facebook",
+            "faTwitter": "Twitter",
+            "faInstagram": "Instagram",
+            "faYoutube": "YouTube",
+            "faTiktok": "TikTok",
+            "faDiscord": "Discord",
+            "faTwitch": "Twitch",
+            "faSpotify": "Spotify",
+            "faGithub": "GitHub",
+            "faThread": "Thread",
+            "faPinterest": "Pinterest",
+            "facebook": "Facebook",
+            "twitter": "Twitter",
+            "instagram": "Instagram",
+            "youtube": "YouTube",
+            "tiktok": "TikTok",
+            "discord": "Discord",
+            "twitch": "Twitch",
+            "spotify": "Spotify",
+            "github": "GitHub",
+            "thread": "Thread",
+            "pinterest": "Pinterest"
+        }
+    },
+    "profile": {
+        "posts": {
+            "title": "Título",
+            "content": "Contenido",
+            "publishedAt": "Publicado en",
+            "category": "Categoría",
+            "author": "Autor",
+            "edit": "Editar",
+            "view": "Ver"
+        },
+        "settings": {
+            "title": "Ajustes",
+            "general": {
+                "title": "General",
+                "avatar": "Avatar",
+                "banner": "Banner",
+                "avatarRequired": "Se requiere subir un avatar",
+                "saveChanges": "Guardar cambios"
+            },
+            "password": {
+                "title": "Contraseña",
+                "currentPassword": "Contraseña actual",
+                "newPassword": "Nueva contraseña",
+                "confirmPassword": "Confirmar contraseña",
+                "saveChanges": "Guardar cambios"
+            },
+            "notifications": {
+                "title": "Notificaciones",
+                "email": "Recibir notificaciones por correo electrónico",
+                "push": "Recibir notificaciones por push",
+                "saveChanges": "Guardar cambios"
+            }
+        }
+    },
+    "layout": {
+        "sider": {
+            "menu": {
+                "groups-post": "Opciones",
+                "group-page": "Publicaciones",
+                "group-admin": "Administradores"
+            },
+            "user": {
+                "info": "Ver mi perfil",
+                "logOut": "Cerrar sesión"
+            },
+            "@post": "Publicaciones",
+            "@categories": "Categorías",
+            "@tags": "Etiquetas",
+            "@users": "Usuarios",
+            "@roles": "Roles",
+            "@profile": "Perfil"
+        },
+        "navbar": {
+            "home": "Home",
+            "search": "Buscar",
+            "notifications": "Notificaciones",
+            "profile": "Perfil",
+            "bread": {
+                "403": "No autorizado",
+                "dashboard": "Dashboard",
+                "posts": "Publicaciones",
+                "categories": "Categorías",
+                "tags": "Etiquetas",
+                "users": "Usuarios",
+                "roles": "Roles",
+                "admin": "Administrador",
+                "settings": "Ajustes",
+                "profile": "Perfil"
+            }
+        }
+    },
+    "headerPages": {
+        "search": "Buscar",
+        "posts": {
+            "searchPlaceholder": "Buscar una publicación",
+            "filtres": "Buscar por filtros",
+            "add": "Agregar publicación"
+        },
+        "searchPlaceholder": "Buscar elemento",
+        "filtres": "Buscar por filtros",
+        "sort": "Ordenar por"
+    },
+    "posts": {
+        "title": "Publicaciones",
+        "add": "Agregar publicación",
+        "status": {
+            "DRAFT": "Borrador",
+            "PUBLISHED": "Publicado",
+            "ARCHIVED": "Borrador"
+        },
+        "createForm": {
+            "title": "Crear nueva publicación",
+            "titleLabel": "Título",
+            "titleRequired": "El título es obligatorio",
+            "titleMaxLength": "El título no puede exceder los 150 caracteres",
+            "descriptionLabel": "Descripción",
+            "descriptionRequired": "La descripción es obligatoria",
+            "descriptionMaxLength": "La descripción no puede exceder los 500 caracteres",
+            "create": "Crear",
+            "cancel": "Cancelar"
+        },
+        "editForm": {
+            "title": "Editar publicación",
+            "titleLabel": "Título",
+            "titleRequired": "El título es obligatorio",
+            "titleMaxLength": "El título no puede exceder los 150 caracteres",
+            "descriptionLabel": "Descripción",
+            "descriptionRequired": "La descripción es obligatoria",
+            "descriptionMaxLength": "La descripción no puede exceder los 500 caracteres",
+            "content": "Se requiere el cuerpo de la publicación",
+            "category": "Categoría",
+            "categoryRequired": "La categoría es requerida",
+            "tags": "Etiquetas",
+            "tagsRequired": "Se requiere una o mas etiquetas",
+            "statusPost": "Estado de la publicación",
+            "infoPost": "Información de la publicación",
+            "edit": "Editar",
+            "settings": "Configuraciones",
+            "banner": "Subir imagen de portada",
+            "bannerRequired": "Se requiere una imagen de portada",
+            "statusLabel": "Estado de la publicación",
+            "order": {
+                "ascendingCreated": "Ordenar por fecha de creación ascendente",
+                "descendingCreated": "Ordenar por fecha de creación descendente"
+            },
+            "status": {
+                "DRAFT": "Borrador",
+                "PUBLISHED": "Publicado",
+                "ARCHIVED": "Archivado"
+            },
+            "serverStatus": {
+                "success": "Borrador guardado correctamente",
+                "saving": "Guardando borrador...",
+                "publishing": "Publicando borrador...",
+                "publishedOk": "Publicación se ha creado correctamente",
+                "publishedUpdated": "Publicación actualizada con éxito",
+                "publishError": "No se pudo publicar la publicación",
+                "saveError": "No se pudo guardar la publicación"
+            },
+            "publish": "Publicar",
+            "preview": "Vista previa",
+            "saveDraft": "Guardar como borrador",
+            "save": "Guardar cambios",
+            "cancel": "Cancelar"
+        },
+        "files": {
+            "files": "Archivos",
+            "actions": {
+                "selects": "Seleccionar archivos",
+                "cancel": "Cancelar"
+            },
+            "uploads": "Subir archivos",
+            "upload": "Subir archivo",
+            "drop": {
+                "title": "Subir archivo de 1920x1080"
+            }
+        }
+    },
+    "categories": {
+        "header": "Categoría",
+        "columns": {
+            "id": "ID",
+            "name": "Nombre",
+            "description": "Descripción",
+            "action": {
+                "title": "Acciones",
+                "deleteTitle": "¿Estás seguro de que deseas eliminar esta categoría?",
+                "deleteConfirm": "Eliminar",
+                "deleteCancel": "Cancelar",
+                "edit": "Editar",
+                "delete": "Eliminar"
+            }
+        },
+        "form": {
+            "nameLabel": "Nombre",
+            "nameRequired": "El nombre es obligatorio",
+            "nameMaxLength": "El nombre no puede exceder los 150 caracteres",
+            "descriptionLabel": "Descripción",
+            "descriptionRequired": "La descripción es obligatoria",
+            "descriptionMaxLength": "La descripción no puede exceder los 500 caracteres",
+            "create": "Crear",
+            "save": "Guardar cambios",
+            "edit": "Editar",
+            "cancel": "Cancelar"
+        }
+    },
+    "tags": {
+        "header": "Tags",
+        "form": {
+            "nameLabel": "Nombre",
+            "nameRequired": "El nombre es requerido",
+            "nameMaxLength": "El nombre no puede exceder los 150 caracteres",
+            "descriptionLabel": "Descripción",
+            "descriptionRequired": "La descripción es requerida",
+            "descriptionMaxLength": "La descripción no puede exceder los 500 caracteres",
+            "colorLabel": "Color",
+            "colorRequired": "El color es requerido"
+        },
+        "columns": {
+            "id": "ID",
+            "name": "Nombre",
+            "description": "Descripción",
+            "color": "Color",
+            "action": {
+                "title": "Acciones",
+                "deleteTitle": "¿Estás seguro de que deseas eliminar este tag?",
+                "deleteConfirm": "Sí",
+                "deleteCancel": "No"
+            }
+        }
+    },
+    "users": {
+        "header": "Usuarios",
+        "columns": {
+            "id": "ID",
+            "avatar": "Avatar",
+            "name": "Nombre de usuario",
+            "email": "Correo electrónico",
+            "role": "Rol",
+            "action": {
+                "title": "Acciones",
+                "deleteTitle": "¿Estás seguro de que deseas eliminar este usuario?",
+                "deleteConfirm": "Sí",
+                "deleteCancel": "No"
+            }
+        },
+        "form": {
+            "name": "Nombre de usuario",
+            "nameRequired": "El nombre de usuario es requerido",
+            "nameMinLength": "El nombre de usuario debe tener al menos 6 caracteres",
+            "nameMaxLength": "El nombre de usuario no puede exceder los 30 caracteres",
+            "avatar": "Imagen de perfil",
+            "avatarRequired": "Se requiere subir un avatar",
+            "email": "Correo electrónico",
+            "emailRequired": "El correo electrónico es requerido",
+            "emailInvalid": "El correo electrónico no es válido",
+            "password": "Contraseña",
+            "passwordRequired": "La contraseña es requerida",
+            "confirmPassword": "Confirmar contraseña",
+            "confirmPasswordRequired": "Confirmar contraseña es requerida",
+            "confirmPasswordMismatch": "Las contraseñas no coinciden",
+            "role": "Rol",
+            "roleRequired": "Se requiere un rol para el usuario"
+        }
+    },
+    "roles": {
+        "header": "Roles",
+        "columns": {
+            "id": "ID",
+            "name": "Nombre",
+            "permissions": "Permisos",
+            "action": {
+                "title": "Acciones",
+                "deleteTitle": "¿Estás seguro de que deseas eliminar este rol?",
+                "deleteConfirm": "Sí",
+                "deleteCancel": "No"
+            }
+        },
+        "a": {
+            "perfil": "Mi perfil",
+            "post": "Publicaciones",
+            "post-all": "Todas las publicaciones",
+            "post-me": "Mis publicaciones",
+            "post-create": "Crear publicación",
+            "post-save": "Editar publicación",
+            "post-publish": "Publicar publicaciones",
+            "post-delete": "Eliminar publicaciones",
+            "categories": "Categorías",
+            "categories-create": "Crear categoría",
+            "categories-edit": "Editar categoría",
+            "categories-delete": "Eliminar categorías",
+            "tag": "Etiquetas",
+            "tag-create": "Crear etiqueta",
+            "tag-edit": "Editar etiqueta",
+            "tag-delete": "Eliminar etiquetas",
+            "users": "Usuarios",
+            "users-create": "Crear usuario",
+            "users-edit": "Editar usuario",
+            "users-delete": "Eliminar usuario",
+            "user-resource": "Mis archivos",
+            "roles": "Roles",
+            "roles-create": "Crear rol",
+            "roles-edit": "Editar rol",
+            "roles-delete": "Eliminar rol"
+        },
+        "form": {
+            "name": "Nombre",
+            "nameRequired": "El nombre es requerido",
+            "nameMaxLength": "El nombre no puede exceder los 150 caracteres",
+            "permissions": "Permisos",
+            "permissionsRequired": "Permisos requerido",
+            "publicGroup": "Pagina publica",
+            "adminGroup": "Permisos de administrador"
+        }
+    },
+    "public": {
+        "header": {
+            "aboutUs": "Sobre nosotros"
+        }
+    }
+}

@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "Users" ALTER COLUMN "banner" DROP NOT NULL,
+ALTER COLUMN "description" DROP NOT NULL,
+ALTER COLUMN "slug" DROP NOT NULL;
