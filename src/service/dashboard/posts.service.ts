@@ -284,7 +284,7 @@ export const publishPost = async (
                     id: updateTemp.id,
                 },
             });
-            revalidatePath(`/${updated?.slug}/${updated?.slug}`);
+            revalidatePath(`/${updated?.Categories?.slug}/${updated?.slug}`);
             return {
                 response: {
                     message: "publishedUpdated",
@@ -344,7 +344,7 @@ export const publishPost = async (
                     id: updateTemp.id,
                 },
             });
-            revalidatePath(`/${updated?.slug}/${updated?.slug}`);
+            revalidatePath(`/${updated?.Categories?.slug}/${updated?.slug}`);
             return {
                 response: {
                     message: "publishedOk",

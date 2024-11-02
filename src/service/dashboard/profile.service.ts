@@ -1,6 +1,33 @@
-import {prisma} from "@/lib/prisma";
+import {prisma as PrismaClient} from "@/lib/prisma";
 import {ReturnType} from "@/types/api/response";
 import {validateError} from "@/utils/ServerError";
+import {revalidatePath} from "next/cache";
+import slugify from "slugify";
+
+const prisma = PrismaClient.$extends({
+    query: {
+        users: {
+            create({args, query}) {
+                if (args.data.name) {
+                    args.data.slug = slugify(args.data.name, {
+                        lower: true,
+                        strict: true,
+                    });
+                }
+                return query(args);
+            },
+            update({args, query}) {
+                if (args.data.name && typeof args.data.name === "string") {
+                    args.data.slug = slugify(args.data.name, {
+                        lower: true,
+                        strict: true,
+                    });
+                }
+                return query(args);
+            },
+        },
+    },
+});
 
 export async function getProfile(id: string): Promise<ReturnType> {
     try {
@@ -42,6 +69,7 @@ export async function editProfile(id: string, data: any): Promise<ReturnType> {
             where: {id: parseInt(id)},
             data,
         });
+        revalidatePath(`/team/${user.slug}`);
         return {
             response: user,
             status: {status: 200},
