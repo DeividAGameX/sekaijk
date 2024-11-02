@@ -2,7 +2,6 @@ import {getToken} from "next-auth/jwt";
 
 export async function allowedMiddleware(
     req: any,
-    allowed: string
 ): Promise<boolean> {
     const token = await getToken({
         req,
