@@ -35,7 +35,6 @@ interface UserFormType {
 }
 
 const BannerImg = ({
-    id,
     value,
     onChange,
 }: {
@@ -115,7 +114,6 @@ const BannerImg = ({
             />
             <FileManager
                 open={open}
-                id={id}
                 size={1080 / 1080}
                 onClose={() => setOpen(false)}
                 selectFile={selectFile}
