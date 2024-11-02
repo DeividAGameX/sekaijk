@@ -353,6 +353,7 @@
             "confirmPassword": "Confirmar contraseña",
             "confirmPasswordRequired": "Confirmar contraseña es requerida",
             "confirmPasswordMismatch": "Las contraseñas no coinciden",
+            "team": "Es parte del team publico",
             "role": "Rol",
             "roleRequired": "Se requiere un rol para el usuario"
         }

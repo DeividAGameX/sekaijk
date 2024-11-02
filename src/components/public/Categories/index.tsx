@@ -68,6 +68,7 @@ function ListCategories({slug}: {slug: string}) {
                                         <Link
                                             href={`/${slug}/${post.slug}`}
                                             title={post.title}
+                                            className="overflow-hidden text-ellipsis"
                                         >
                                             <figure className="w-full h-60 rounded-lg overflow-hidden group/item">
                                                 <Image
@@ -78,7 +79,7 @@ function ListCategories({slug}: {slug: string}) {
                                                     height={560}
                                                 />
                                             </figure>
-                                            <h1 className="text-2xl text-nowrap text-ellipsis font-bold p-1 transition duration-200 hover:text-primary">
+                                            <h1 className="text-2xl line-clamp-1 text-ellipsis font-bold p-1 transition duration-200 hover:text-primary">
                                                 {post.title}
                                             </h1>
                                         </Link>
@@ -86,10 +87,10 @@ function ListCategories({slug}: {slug: string}) {
                                             <p className="line-clamp-2 text-ellipsis my-2 text-neutral-400">
                                                 {post.description}
                                             </p>
-                                            <p className="text-sm text-neutral-500">
+                                            <p className="text-sm text-neutral-500 overflow-hidden text-ellipsis">
                                                 <Link
                                                     href={`/team/${post.author?.slug}`}
-                                                    className="transition duration-200 hover:text-primary"
+                                                    className="text-ellipsis transition duration-200 hover:text-primary"
                                                 >
                                                     {post.author?.name}
                                                 </Link>

@@ -83,10 +83,12 @@ const InformationPost = ({
             {!breakPoint ? (
                 <Collapse
                     bordered={false}
+                    defaultActiveKey={"Info"}
                     className="w-full bg-body p-4 rounded-lg"
                     items={[
                         {
                             label: "Info",
+                            key: "Info",
                             children: (
                                 <Form form={infoPost} layout="vertical">
                                     <Form.Item
@@ -355,6 +357,7 @@ function Page(props: {params: {id: string}}) {
             content: t("posts.editForm.serverStatus.saving"),
         });
         setIsRequired(false);
+        console.log(infoPost.getFieldsValue());
         savePost({
             id: props.params.id,
             ...infoPost.getFieldsValue(),

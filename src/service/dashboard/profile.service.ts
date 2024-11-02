@@ -69,7 +69,10 @@ export async function editProfile(id: string, data: any): Promise<ReturnType> {
             where: {id: parseInt(id)},
             data,
         });
-        revalidatePath(`/team/${user.slug}`);
+        if (user.isPublic) {
+            revalidatePath(`/team`);
+            revalidatePath(`/team/${user.slug}`);
+        }
         return {
             response: user,
             status: {status: 200},
@@ -87,6 +90,15 @@ export async function addSocial(id: string, data: any): Promise<ReturnType> {
                 userId: parseInt(id),
             },
         });
+        const user = await prisma.users.findUnique({
+            where: {id: parseInt(id)},
+        });
+        if (user) {
+            if (user.isPublic) {
+                revalidatePath(`/team`);
+                revalidatePath(`/team/${user.slug}`);
+            }
+        }
         return {
             response: social,
             status: {status: 200},
@@ -101,6 +113,15 @@ export async function deleteSocial(id: string): Promise<ReturnType> {
         await prisma.social.delete({
             where: {id: parseInt(id)},
         });
+        const user = await prisma.users.findUnique({
+            where: {id: parseInt(id)},
+        });
+        if (user) {
+            if (user.isPublic) {
+                revalidatePath(`/team`);
+                revalidatePath(`/team/${user.slug}`);
+            }
+        }
         return {
             response: null,
             status: {status: 200},

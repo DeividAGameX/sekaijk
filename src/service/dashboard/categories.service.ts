@@ -63,6 +63,7 @@ export async function createCategory(data: any) {
         const category = await prisma.categories.create({
             data: {...data, slug: ""},
         });
+        revalidatePath(`/`);
         revalidatePath(`/${category.slug}`);
         return {
             response: category,
@@ -80,6 +81,7 @@ export async function updateCategory(id: string, data: any) {
             where: {id: parseInt(id)},
             data,
         });
+        revalidatePath(`/`);
         revalidatePath(`/${category.slug}`);
         return {
             response: category,

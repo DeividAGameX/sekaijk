@@ -1,7 +1,9 @@
 import {prisma as PrismaClient} from "@/lib/prisma";
 import {ReturnType} from "@/types/api/response";
 import {validateError} from "@/utils/ServerError";
+import {revalidatePath} from "next/cache";
 import slugify from "slugify";
+import bcrypt from "bcrypt";
 
 const prisma = PrismaClient.$extends({
     query: {
@@ -79,9 +81,17 @@ export async function getUserById(id: string): Promise<ReturnType> {
 
 export async function createUser(data: any): Promise<ReturnType> {
     try {
+        if (data.password) {
+            data.password = await bcrypt.hash(data.password, 12);
+        }
         const user = await prisma.users.create({
             data,
         });
+        if (user.isPublic) {
+            revalidatePath(`/`);
+            revalidatePath(`/team`);
+            revalidatePath(`/team/${user.slug}`);
+        }
         return {
             response: user,
             status: {status: 200},
@@ -93,10 +103,18 @@ export async function createUser(data: any): Promise<ReturnType> {
 
 export async function updateUser(id: string, data: any): Promise<ReturnType> {
     try {
+        if (data.password) {
+            data.password = await bcrypt.hash(data.password, 12);
+        }
         const user = await prisma.users.update({
             where: {id: parseInt(id)},
             data,
         });
+        if (user.isPublic) {
+            revalidatePath(`/`);
+            revalidatePath(`/team`);
+            revalidatePath(`/team/${user.slug}`);
+        }
         return {
             response: user,
             status: {status: 200},

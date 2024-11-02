@@ -8,6 +8,7 @@ import DOMPurify from "isomorphic-dompurify";
 import ListPosts from "@/components/public/Teams/PostList";
 import moment from "moment";
 import {Metadata} from "next";
+import { notFound } from "next/navigation";
 
 type Props = {
     params: {user: string};
@@ -138,7 +139,7 @@ async function AuthorPage({params}: Props) {
         },
         take: 3,
     });
-    if (!userInfo) throw new Error("Usuario no encontrado");
+    if (!userInfo) notFound();
     return (
         <>
             <article

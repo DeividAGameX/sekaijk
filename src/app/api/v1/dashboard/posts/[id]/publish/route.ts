@@ -3,10 +3,10 @@ import {authentication} from "@/middleware/auth.middleware";
 import {publishPost} from "@/service/dashboard/posts.service";
 import {NextRequest, NextResponse} from "next/server";
 
-export const PUT = async (
+export async function PUT(
     req: NextRequest,
     {params, query}: {params: {id: string}; query: any}
-) => {
+) {
     const allow = await allowedMiddleware(req, "@post-edit");
     if (allow) {
         return NextResponse.json({message: "allowed"}, {status: 403});
@@ -22,4 +22,4 @@ export const PUT = async (
         authenticate.response
     );
     return NextResponse.json(response.response, response.status);
-};
+}

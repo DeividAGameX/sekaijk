@@ -16,6 +16,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
     Avatar,
     Button,
+    Checkbox,
     Dropdown,
     Form,
     Image,
@@ -194,10 +195,13 @@ function UserForm({isOpen, id, onClose}: UserFormType) {
                     </Form.Item>
                 </div>
             </div>
+            <Form.Item name={"isPublic"} valuePropName="checked">
+                <Checkbox>{t("form.team")}</Checkbox>
+            </Form.Item>
             <Form.Item
                 name={"password"}
                 label={t("form.password")}
-                rules={[{required: true, message: t("form.nameRequired")}]}
+                rules={[{required: !id, message: t("form.nameRequired")}]}
             >
                 <Input.Password maxLength={100} />
             </Form.Item>
@@ -208,7 +212,7 @@ function UserForm({isOpen, id, onClose}: UserFormType) {
                 hasFeedback
                 rules={[
                     {
-                        required: true,
+                        required: !id,
                         message: t("form.confirmPasswordRequired"),
                     },
                     ({getFieldValue}) => ({

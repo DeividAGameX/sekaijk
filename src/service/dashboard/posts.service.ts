@@ -279,11 +279,20 @@ export const publishPost = async (
                             slug: true,
                         },
                     },
+                    author: {
+                        select: {
+                            slug: true,
+                        },
+                    },
                 },
                 where: {
                     id: updateTemp.id,
                 },
             });
+            revalidatePath(`/`);
+            revalidatePath(`/team`);
+            revalidatePath(`/team/${updated?.author.slug}`);
+            revalidatePath(`/${updated?.Categories?.slug}`);
             revalidatePath(`/${updated?.Categories?.slug}/${updated?.slug}`);
             return {
                 response: {
@@ -339,11 +348,20 @@ export const publishPost = async (
                             slug: true,
                         },
                     },
+                    author: {
+                        select: {
+                            slug: true,
+                        },
+                    },
                 },
                 where: {
                     id: updateTemp.id,
                 },
             });
+            revalidatePath(`/`);
+            revalidatePath(`/team`);
+            revalidatePath(`/team/${updated?.author.slug}`);
+            revalidatePath(`/${updated?.Categories?.slug}`);
             revalidatePath(`/${updated?.Categories?.slug}/${updated?.slug}`);
             return {
                 response: {
