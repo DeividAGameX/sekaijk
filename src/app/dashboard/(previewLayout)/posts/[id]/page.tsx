@@ -30,6 +30,10 @@ import BannerImg from "@/components/admin/Forms/ImageSelect";
 import {faInfo, faSpinner} from "@fortawesome/free-solid-svg-icons";
 import {AnimatePresence, motion} from "framer-motion";
 
+function removeBrTags(str: string) {
+    return str.replace(/<p><\/p>/g, "<br>");
+}
+
 const TagRender = (props: any) => {
     const {label, value, closable, onClose, tagList} = props;
     const onPreventMouseDown = (event: React.MouseEvent<HTMLSpanElement>) => {
@@ -313,7 +317,7 @@ function Page(props: {params: {id: string}}) {
                     publishPost({
                         id: props.params.id,
                         ...e,
-                        content: editor.current.getHTML(),
+                        content: removeBrTags(editor.current.getHTML()),
                     })
                         .then((e) => {
                             messageApi.open({
@@ -357,11 +361,11 @@ function Page(props: {params: {id: string}}) {
             content: t("posts.editForm.serverStatus.saving"),
         });
         setIsRequired(false);
-        console.log(infoPost.getFieldsValue());
+        console.log(removeBrTags(editor.current.getHTML()));
         savePost({
             id: props.params.id,
             ...infoPost.getFieldsValue(),
-            content: editor.current.getHTML(),
+            content: removeBrTags(editor.current.getHTML()),
         })
             .then((e) => {
                 messageApi.open({

@@ -26,7 +26,4 @@ jobs:
                       cd /home/sekaijk.com/public_html
                       git pull origin main
                       git status
-                      npm install
-                      npx prisma migrate deploy
-                      npm run build
-                      pm2 restart sekaijk-server
+                      ./run.sh
