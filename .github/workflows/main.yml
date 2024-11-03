@@ -26,4 +26,9 @@ jobs:
                       cd /home/sekaijk.com/public_html
                       git pull origin main
                       git status
-                      ./run.sh
+                      export NVM_DIR=~/.nvm
+                      source ~/.nvm/nvm.sh
+                      npm install
+                      npx prisma migrate deploy
+                      npm run build
+                      pm2 restart sekaijk-server
