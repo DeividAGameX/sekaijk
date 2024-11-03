@@ -348,7 +348,7 @@ async function Posts({params}: Props) {
                     </div>
                 </div>
             </header>
-            <section className="max-w-7xl w-full mx-auto flex gap-2">
+            <section className="max-w-7xl w-full mx-auto flex gap-2 flex-wrap lg:flex-nowrap">
                 <main className="max-w-screen-lg w-full bg-primary relative p-2 rounded-lg">
                     <article
                         className="content-jk p-4"
@@ -357,57 +357,65 @@ async function Posts({params}: Props) {
                         }}
                     />
                     <Divider orientation="left">
-                        <span className="bg-body p-2 font-bold">
-                            <FontAwesomeIcon icon={faShare} className="mr-2" />
-                            Compartir:{" "}
-                        </span>
-                        <CopyButton
-                            toCopy={`${process.env.NEXT_PUBLIC_URL || ""}/${
-                                post?.Categories?.slug
-                            }/${post?.slug}`}
-                            className={`bg-body p-2 hover:bg-neutral-900 text-white hover:text-primary`}
-                        >
-                            <FontAwesomeIcon icon={faLink} className="mr-2" />
-                            Copiar enlace
-                        </CopyButton>
-                        <a
-                            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                                (process.env.NEXT_PUBLIC_URL || "") +
-                                    `/${post?.Categories?.slug}/${post?.slug}`
-                            )}&p=${encodeURIComponent(
-                                "Lee esta publicación en SekAiJK"
-                            )}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`bg-body p-2 hover:bg-neutral-900 ${colorSocialMedia["facebook"]}`}
-                        >
-                            <FontAwesomeIcon
-                                icon={faFacebook}
-                                className="mr-2"
-                            />
-                            Facebook
-                        </a>
-                        <a
-                            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
-                                (process.env.NEXT_PUBLIC_URL || "") +
-                                    `/${post?.Categories?.slug}/${post?.slug}`
-                            )}&text=${encodeURIComponent(
-                                "Lee esta publicación en SekAiJK"
-                            )}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`bg-body p-2 hover:bg-neutral-900 ${colorSocialMedia["twitter"]}`}
-                        >
-                            <FontAwesomeIcon
-                                icon={faTwitter}
-                                className="mr-2"
-                            />
-                            Twitter
-                        </a>
+                        <div className="flex flex-wrap lg:flex-nowrap">
+                            <span className="bg-body p-2 font-bold w-full">
+                                <FontAwesomeIcon
+                                    icon={faShare}
+                                    className="mr-2"
+                                />
+                                Compartir:{" "}
+                            </span>
+                            <CopyButton
+                                toCopy={`${process.env.NEXT_PUBLIC_URL || ""}/${
+                                    post?.Categories?.slug
+                                }/${post?.slug}`}
+                                className={`bg-body w-full p-2 hover:bg-neutral-900 text-white hover:text-primary`}
+                            >
+                                <FontAwesomeIcon
+                                    icon={faLink}
+                                    className="mr-2"
+                                />
+                                Copiar enlace
+                            </CopyButton>
+                            <a
+                                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                                    (process.env.NEXT_PUBLIC_URL || "") +
+                                        `/${post?.Categories?.slug}/${post?.slug}`
+                                )}&p=${encodeURIComponent(
+                                    "Lee esta publicación en SekAiJK"
+                                )}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`bg-body w-full p-2 hover:bg-neutral-900 ${colorSocialMedia["facebook"]}`}
+                            >
+                                <FontAwesomeIcon
+                                    icon={faFacebook}
+                                    className="mr-2"
+                                />
+                                Facebook
+                            </a>
+                            <a
+                                href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
+                                    (process.env.NEXT_PUBLIC_URL || "") +
+                                        `/${post?.Categories?.slug}/${post?.slug}`
+                                )}&text=${encodeURIComponent(
+                                    "Lee esta publicación en SekAiJK"
+                                )}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`bg-body w-full p-2 hover:bg-neutral-900 ${colorSocialMedia["twitter"]}`}
+                            >
+                                <FontAwesomeIcon
+                                    icon={faTwitter}
+                                    className="mr-2"
+                                />
+                                Twitter
+                            </a>
+                        </div>
                     </Divider>
                     <section
                         aria-labelledby="author"
-                        className="flex items-center bg-body p-4"
+                        className="flex flex-col items-center bg-body p-4 lg:flex-row"
                     >
                         <figure className="w-32 h-32 bg-neutral-900 overflow-hidden rounded-full">
                             <Image
@@ -419,7 +427,7 @@ async function Posts({params}: Props) {
                             />
                         </figure>
                         <div className="flex-1 p-6">
-                            <header className="flex gap-2 items-end">
+                            <header className="flex flex-col gap-2 items-center lg:flex-row lg:items-end">
                                 <Link
                                     href={`/team/${post?.author.slug}`}
                                     className="text-white transition duration-200 hover:text-primary"
@@ -500,7 +508,7 @@ async function Posts({params}: Props) {
                         />
                     </section>
                 </main>
-                <aside className="max-w-xs w-full py-4">
+                <aside className="w-full py-4 lg:max-w-xs">
                     <div className="sticky top-20">
                         <section>
                             <Divider orientation="left">
