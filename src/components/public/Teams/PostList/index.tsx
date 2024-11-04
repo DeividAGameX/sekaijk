@@ -78,7 +78,7 @@ function ListPosts({slug}: {slug: string}) {
                                                     height={560}
                                                 />
                                             </figure>
-                                            <h1 className="text-2xl text-nowrap text-ellipsis font-bold p-1 transition duration-200 hover:text-primary">
+                                            <h1 className="text-2xl text-nowrap line-clamp-1 text-ellipsis font-bold p-1 transition duration-200 hover:text-primary">
                                                 {post.title}
                                             </h1>
                                         </Link>
