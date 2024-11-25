@@ -28,11 +28,12 @@ export function LoginForm({callback}: {callback: string}) {
                     type: "error",
                     content: t(e?.error),
                 });
+                return;
             }
             messageApi.open({
                 key: "signIn",
                 type: "success",
-                content: "Ok",
+                content: "Sesión ",
             });
             if (callback) {
                 router.replace(callback);

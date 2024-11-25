@@ -27,7 +27,9 @@ import {
 import Link from "next/link";
 import CopyButton from "@/components/CopyButton";
 import CommentPost from "@/components/public/posts/Comments";
-import {notFound} from "next/navigation";
+import {notFound, redirect} from "next/navigation";
+import {config} from "@/app/api/auth/[...nextauth]/route";
+import {getServerSession} from "next-auth";
 
 const iconsSocialMedia = {
     facebook: faFacebook,
@@ -92,6 +94,20 @@ type Props = {
 export const dynamic = "force-dynamic";
 
 async function Posts({params}: Props) {
+    const session = await getServerSession(config);
+    if (!session?.user) {
+        redirect("/dashboard/403");
+    }
+    const rol = (session.user as {rolesId: number}).rolesId;
+    const permiso = await prisma.permissions.findFirst({
+        where: {
+            roleId: rol,
+            permissions: "@post-edit",
+        },
+    });
+    if (!permiso) {
+        redirect("/dashboard/403");
+    }
     const post = await prisma.posts.findFirst({
         where: {
             id: parseInt(params.idPost),
