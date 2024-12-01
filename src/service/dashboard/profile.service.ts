@@ -50,8 +50,37 @@ export async function getProfile(id: string): Promise<ReturnType> {
 export async function getPost(id: string): Promise<ReturnType> {
     try {
         const posts = await prisma.posts.findMany({
+            select: {
+                id: true,
+                title: true,
+                banner: true,
+                description: true,
+                slug: true,
+                createdAt: true,
+                updatedAt: true,
+                author: {
+                    select: {
+                        id: true,
+                        name: true,
+                        avatar: true,
+                    },
+                },
+                Categories: {
+                    select: {
+                        id: true,
+                        name: true,
+                    },
+                },
+                Tags: {
+                    select: {
+                        id: true,
+                        name: true,
+                    },
+                },
+            },
             where: {
                 authorId: parseInt(id),
+                draft: null,
             },
         });
         return {

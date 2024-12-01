@@ -56,6 +56,7 @@ function BannerImg({value, className, sizeImg, onChange}: BannerImgProps) {
                             src={value}
                             alt=""
                             style={{width: "100%", height: "100%"}}
+                            className="object-cover"
                             preview={false}
                         />
                     </div>

@@ -45,6 +45,11 @@ import usePermissions from "@/hooks/usePermissions";
 import Link from "next/link";
 import BannerImg from "@/components/admin/Forms/ImageSelect";
 import DOMPurify from "isomorphic-dompurify";
+import moment from "moment";
+
+function removeBrTags(str: string) {
+    return str.replace(/<p><\/p>/g, "<br>");
+}
 
 function SocialMedia({
     social,
@@ -217,11 +222,22 @@ function UserPost() {
                         }
                     >
                         <List.Item.Meta
-                            title={item.title}
-                            description={item.author?.name}
-                        >
-                            {item.description}
-                        </List.Item.Meta>
+                            title={
+                                <h2 className="text-xl font-bold line-clamp-2">
+                                    {item.title}
+                                </h2>
+                            }
+                            description={
+                                <p>
+                                    {item.Categories?.name}
+                                    {" - "}
+                                    <span className="font-bold">
+                                        {moment(item.createdAt).format("LL")}
+                                    </span>
+                                </p>
+                            }
+                        />
+                        <div className="line-clamp-1">{item.description}</div>
                     </List.Item>
                 )}
             />
@@ -248,7 +264,10 @@ function UserSettings({user}: {user: any}) {
     const submitData = async (e: any) => {
         setLoading(true);
         try {
-            await updateProfile(e);
+            await updateProfile({
+                ...e,
+                description: removeBrTags(e.description),
+            });
         } catch (err) {}
         setLoading(false);
     };
@@ -281,7 +300,7 @@ function UserSettings({user}: {user: any}) {
                         <DescriptionEditor />
                     </Form.Item>
                 </div>
-                <div className="flex w-full gap-2">
+                <div className="flex flex-wrap md:flex-nowrap w-full gap-2">
                     <Form.Item
                         name="avatar"
                         label={t("general.avatar")}
@@ -296,7 +315,6 @@ function UserSettings({user}: {user: any}) {
                     </Form.Item>
                     <Form.Item
                         name="banner"
-                        className="w-full"
                         rootClassName="w-full"
                         label={t("general.banner")}
                     >

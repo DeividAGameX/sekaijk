@@ -119,7 +119,7 @@ const InformationPost = ({
                                             },
                                         ]}
                                     >
-                                        <Input />
+                                        <Input maxLength={200} />
                                     </Form.Item>
                                     <Form.Item
                                         name="description"

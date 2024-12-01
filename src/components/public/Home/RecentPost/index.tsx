@@ -24,7 +24,7 @@ function RecentPost({reviews}: {reviews: HomeReviewsType[]}) {
             <div className="max-w-7xl w-full mx-auto overflow-hidden">
                 <h4 className="text-lg text-neutral-600">Lo mas reciente</h4>
                 <h1 className="text-5xl">Reviews recientes</h1>
-                <div className="flex flex-wrap gap-10 my-10">
+                <div className="grid md:grid-cols-2 gap-10 my-10">
                     <motion.div
                         initial={{translateX: "-100%", opacity: 0}}
                         whileInView={{translateX: 0, opacity: 1}}
@@ -81,7 +81,7 @@ function RecentPost({reviews}: {reviews: HomeReviewsType[]}) {
                                 key={review.slug}
                                 className="mb-2 flex items-center gap-2 group/item"
                             >
-                                <div className="w-40 h-40 overflow-hidden">
+                                <div className="w-40 h-40 min-w-40 overflow-hidden">
                                     <Image
                                         src={review.banner || ""}
                                         alt={review.title}

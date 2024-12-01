@@ -106,7 +106,7 @@ function MenuBar({editor}: {editor: Editor}) {
 
     return (
         <div className="w-full flex flex-col items-center justify-center bg-primary rounded-t-lg gap-2 p-2 top-1 z-10 md:flex-row md:justify-between">
-            <div className="flex gap-2 p-1">
+            <div className="flex flex-wrap gap-2 p-1">
                 <Tooltip title="Regresar">
                     <Button
                         type="text"
