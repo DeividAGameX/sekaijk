@@ -9,7 +9,7 @@ import Youtube from "@tiptap/extension-youtube";
 import Link from "@tiptap/extension-link";
 import Blockquote from "@tiptap/extension-blockquote";
 import Highlighter from "@tiptap/extension-highlight";
-import {Tweet} from "@/components/admin/TipTapExtensions/Twitter";
+import {TwitterEmbed} from "@/components/admin/TipTapExtensions/Twitter";
 //*
 import StarterKit from "@tiptap/starter-kit";
 import {Button, Input, Modal, Tooltip} from "antd";
@@ -58,7 +58,7 @@ const extensions = [
     }),
     Blockquote,
     Highlighter,
-    Tweet,
+    TwitterEmbed,
 ];
 
 function InsertLink({
