@@ -5,6 +5,7 @@ import {getMessages} from "next-intl/server";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import {Metadata} from "next";
 import icon from "@/app/favicon.ico";
+import Script from "next/script";
 
 export const metadata: Metadata = {
     title: "SekAiJK - Anime, Videojuegos y Cultura Geek",
@@ -41,6 +42,10 @@ export default async function RootLayout({
     const messages = await getMessages();
     return (
         <html lang="en">
+            <Script
+                async={true}
+                src="https://platform.twitter.com/widgets.js"
+            />
             <Body>
                 <NextIntlClientProvider messages={messages}>
                     {children}

@@ -41,11 +41,11 @@
   font-style: italic;
 }
 :root {
-  --primary: #ff0f80;
-  --secondary: #c6baa8;
+  --primary: #D94862;
+  --secondary: #F2A7C3;
   --primary-body: #121212;
   --secondary-body: #1f1f1f;
-  --secondary-red: #ff6f61;
+  --secondary-red: #F24495;
   --coral: #f2786d;
   --light-gray: #eaeaea;
   --medium-gray: #a9a9a9;
@@ -54,8 +54,8 @@
   --golden-yellow: #d1b53b;
   --teal-green: #2a9d8f;
   --white-text: #ffffff;
-  --text-jk: #ff0f80;
-  --text-hit-jk: #bf226b;
+  --text-jk: #D94862;
+  --text-hit-jk: #b03b54;
   --text-hint-jk: #616161;
   --bg-transparent: rgba($color: #121212, $alpha: 0.5);
   --bg-img: "/assets/FondoPortada.jpg";
@@ -137,6 +137,9 @@ body {
   border-radius: 3px;
   overflow-x: auto;
 }
+.bodyPost img {
+  width: 100%;
+}
 .bodyPost strong {
   font-weight: bold;
 }
@@ -150,6 +153,9 @@ body {
   border: none;
   border-top: 1px solid #ddd;
   margin: 1em 0;
+}
+.bodyPost iframe {
+  width: 100%;
 }
 
 .content-jk {
@@ -235,6 +241,9 @@ body {
   border-top: 1px solid #ddd;
   margin: 1em 0;
 }
+.content-jk img {
+  width: 100%;
+}
 .content-jk table {
   border-collapse: collapse;
   width: 100%;
@@ -246,6 +255,9 @@ body {
 }
 .content-jk table th {
   background-color: #f5f5f5;
+}
+.content-jk iframe {
+  width: 100%;
 }
 
 .tabla-jk .ant-table-wrapper {

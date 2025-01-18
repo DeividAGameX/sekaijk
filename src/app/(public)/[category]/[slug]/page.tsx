@@ -29,6 +29,7 @@ import CopyButton from "@/components/CopyButton";
 import CommentPost from "@/components/public/posts/Comments";
 import {Metadata} from "next";
 import {notFound} from "next/navigation";
+import RenderEmbend from "@/components/public/renderEmbedmen";
 
 const iconsSocialMedia = {
     facebook: faFacebook,
@@ -303,6 +304,7 @@ async function Posts({params}: Props) {
             },
         ],
     };
+    console.log(post.content);
     return (
         <article>
             <header
@@ -353,9 +355,13 @@ async function Posts({params}: Props) {
                     <article
                         className="content-jk p-4"
                         dangerouslySetInnerHTML={{
-                            __html: DOMPurify.sanitize(post?.content || ""),
+                            // __html: DOMPurify.sanitize(post?.content || "", {
+                            //     ADD_TAGS: ["iframe", "twitter"],
+                            // }),
+                            __html: post?.content || "",
                         }}
                     />
+                    <RenderEmbend />
                     <Divider orientation="left">
                         <div className="flex flex-wrap lg:flex-nowrap">
                             <span className="bg-body p-2 font-bold w-full">

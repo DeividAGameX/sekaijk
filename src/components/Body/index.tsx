@@ -16,7 +16,7 @@ function Body({
                         algorithm: theme.darkAlgorithm,
                         token: {
                             fontFamily: "Lato",
-                            colorPrimary: "#FF0F80",
+                            colorPrimary: "#D94862",
                             colorBgContainer: "#121212",
                             colorBgBase: "#0a0a0a",
                         },

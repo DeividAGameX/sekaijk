@@ -9,7 +9,7 @@ import Youtube from "@tiptap/extension-youtube";
 import Link from "@tiptap/extension-link";
 import Blockquote from "@tiptap/extension-blockquote";
 import Highlighter from "@tiptap/extension-highlight";
-import {Tweet} from "@/components/admin/TipTapExtensions/Twitter";
+import {TwitterEmbed} from "@/components/admin/TipTapExtensions/Twitter";
 //*
 import StarterKit from "@tiptap/starter-kit";
 import {Button, Dropdown, Input, Modal, Tooltip, Typography} from "antd";
@@ -34,6 +34,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import FileManager from "../../FileManager/FileManager";
 import {useState} from "react";
+import {faTwitter} from "@fortawesome/free-brands-svg-icons";
 
 function InsertLink({
     open,
@@ -74,6 +75,7 @@ function MenuBar() {
     const {editor} = useCurrentEditor();
     const [open, setOpen] = useState(false);
     const [openLink, setOpenLink] = useState(false);
+    const [twitterLink, setTwitterLink] = useState(false);
     const [openYT, setOpenYT] = useState(false);
     if (!editor) {
         return null;
@@ -349,6 +351,11 @@ function MenuBar() {
                     icon={<FontAwesomeIcon icon={faVideo} />}
                     onClick={() => setOpenYT(true)}
                 />
+                <Button
+                    type="text"
+                    icon={<FontAwesomeIcon icon={faTwitter} />}
+                    onClick={() => setTwitterLink(true)}
+                />
             </div>
             <FileManager
                 open={open}
@@ -380,6 +387,18 @@ function MenuBar() {
                 }}
                 onClose={() => setOpenYT(false)}
             />
+            <InsertLink
+                title="Enlace del tweet"
+                open={twitterLink}
+                onSubmit={(url) => {
+                    setTwitterLink(false);
+                    editor.commands.insertTwitterEmbed(
+                        // "https://x.com/aibaaiai/status/1866323632852701409"
+                        url
+                    );
+                }}
+                onClose={() => setOpenYT(false)}
+            />
         </div>
     );
 }
@@ -404,6 +423,7 @@ const extensions = [
     Youtube.configure({
         controls: false,
         nocookie: true,
+        addPasteHandler: false,
     }),
     Link.configure({
         openOnClick: false,
@@ -415,7 +435,7 @@ const extensions = [
     }),
     Blockquote,
     Highlighter,
-    Tweet,
+    TwitterEmbed,
 ];
 
 function PostEditor({editor}: {editor: any}) {

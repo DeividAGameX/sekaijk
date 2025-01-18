@@ -1,7 +1,7 @@
 "use client";
 import {Category} from "@/types/public/Categories";
 import Link from "next/link";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {motion} from "framer-motion";
 import {useTranslations} from "next-intl";
 import {Button, Drawer} from "antd";
@@ -70,6 +70,13 @@ function AboutUsLink() {
 
 function HeaderPage({categories}: {categories: Category[]}) {
     const [drawerCollapsed, setDrawerCollapsed] = useState(false);
+    useEffect(() => {
+        // Cargar los widgets de Twitter
+        const twttr = (window as any).twttr;
+        if (twttr && twttr.widgets) {
+            twttr.widgets.load();
+        }
+    }, []);
     return (
         <nav className="w-full h-16 bg-body fixed z-10">
             <div className="max-w-7xl w-full mx-auto flex items-center justify-between h-full px-4">

@@ -37,8 +37,8 @@ function CardPost({post}: {post: any}) {
                     <span className="text-sm text-neutral-600">
                         {post.author?.name} - {t(post.status)}
                     </span>
-                    <h2 className="text-xl font-bold">{post.title}</h2>
-                    <Typography.Paragraph ellipsis={{rows: 3}} className="mt-2">
+                    <h2 className="text-xl font-bold text-ellipsis line-clamp-1">{post.title}</h2>
+                    <Typography.Paragraph ellipsis={{rows: 3}} className="mt-2 h-16">
                         {post.description}
                     </Typography.Paragraph>
                 </div>

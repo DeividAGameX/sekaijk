@@ -1,48 +1,28 @@
-import {NodeViewProps, NodeViewWrapper} from "@tiptap/react";
-import {nodePasteRule, ReactNodeViewRenderer} from "@tiptap/react";
 import {mergeAttributes, Node} from "@tiptap/core";
-import {Tweet as TweetElement} from "react-tweet";
 
-export const TweetComponent = ({node}: NodeViewProps) => {
-    const url = node.attrs.url;
-    const tweetIdRegex = /\/status\/(\d+)/g;
-    const id = tweetIdRegex.exec(url)?.[1];
+declare module "@tiptap/core" {
+    interface Commands<ReturnType> {
+        twitterEmbed: {
+            /**
+             * Comments will be added to the autocomplete.
+             */
+            insertTwitterEmbed: (someProp: string) => ReturnType;
+        };
+    }
+}
 
-    return (
-        <NodeViewWrapper className="flex justify-center pointer-events-none">
-            <TweetElement id={id || ""} />
-        </NodeViewWrapper>
-    );
-};
+export const TwitterEmbed = Node.create({
+    name: "twitterEmbed",
 
-export const Tweet = Node.create({
-    name: "twitter",
+    group: "block", // Define que es un bloque (no inline)
 
-    group: "block",
+    atom: true, // Los nodos atómicos no se pueden dividir o editar directamente
 
-    atom: true,
-
-    draggable: true,
-
-    addPasteRules() {
-        const twitterUrl = /^https:\/\/(twitter\.com|x\.com)\/.*\/status\/.*/g;
-
-        return [
-            nodePasteRule({
-                find: twitterUrl,
-                type: this.type,
-                getAttributes: (match) => {
-                    return {url: match.input};
-                },
-            }),
-        ];
-    },
-
+    // Definición de cómo se almacena en el documento
     addAttributes() {
         return {
             url: {
-                default:
-                    "https://twitter.com/vercel/status/1683920951807971329",
+                default: null,
             },
         };
     },
@@ -50,21 +30,100 @@ export const Tweet = Node.create({
     parseHTML() {
         return [
             {
-                tag: "twitter",
+                tag: "a[data-twitter-url]",
+                getAttrs: (dom) => {
+                    const url = dom.getAttribute("data-twitter-url");
+                    return url ? {url} : false;
+                },
             },
         ];
     },
 
     renderHTML({HTMLAttributes}) {
-        return ["twitter", mergeAttributes(HTMLAttributes)];
+        return [
+            "a",
+            mergeAttributes(HTMLAttributes, {
+                "data-twitter-url": HTMLAttributes.url,
+                class: "w-full flex justify-center tweet-embed",
+            }),
+        ];
     },
 
-    // TODO: WIP
-    // addCommands() {
-    //   return {}
+    // addNodeView() {
+    //     return ({node}) => {
+    //         const dom = document.createElement("div");
+    //         dom.className = "w-full flex justify-center";
+    //         dom.innerHTML = node.attrs.url;
+    //         // const dom = document.createElement("blockquote");
+    //         // dom.className = "twitter-tweet";
+    //         // dom.innerHTML = `<a href="${node.attrs.url}"></a>`;
+    //         const ww: any = window;
+
+    //         // Llamar a Twitter para renderizar el widget
+    //         if (ww.twttr) {
+    //             ww.twttr.widgets.load(dom);
+    //         }
+
+    //         return {
+    //             dom,
+    //             contentDOM: null,
+    //         };
+    //     };
+    // },
+    addNodeView() {
+        return ({node}) => {
+            const dom = document.createElement("a");
+            dom.id = "tweet-embed";
+            dom.className = "w-full flex justify-center tweet-embed";
+            dom.setAttribute("contenteditable", "false");
+            dom.setAttribute("draggable", "true");
+
+            // Extraer el ID del tweet de la URL
+            const tweetUrl = node.attrs.url;
+            const tweetIdMatch = tweetUrl.match(/status\/(\d+)/); // Buscar el ID en la URL
+            const tweetId = tweetIdMatch ? tweetIdMatch[1] : null;
+
+            if (!tweetId) {
+                dom.textContent = "Error: ID del tweet no válido";
+                return {dom};
+            }
+
+            const iframe = document.createElement("iframe");
+            iframe.src = `https://platform.twitter.com/embed/Tweet.html?id=${tweetId}`;
+            iframe.style.width = "550px";
+            iframe.style.height = "673px";
+            iframe.setAttribute("scrolling", "no");
+            iframe.setAttribute("frameborder", "0");
+            iframe.setAttribute("allowtransparency", "true");
+            iframe.setAttribute("allowfullscreen", "true");
+
+            dom.appendChild(iframe);
+
+            return {
+                dom,
+                contentDOM: null,
+            };
+        };
+    },
+    // addPasteRules() {
+    //     return [
+    //         nodePasteRule({
+    //             find: /https:\/\/twitter\.com\/[a-zA-Z0-9_]+\/status\/\d+/g,
+    //             type: this.type,
+    //         }),
+    //     ];
     // },
 
-    addNodeView() {
-        return ReactNodeViewRenderer(TweetComponent);
+    addCommands() {
+        return {
+            insertTwitterEmbed:
+                (url: string) =>
+                ({commands}) => {
+                    return commands.insertContent({
+                        type: this.name,
+                        attrs: {url},
+                    });
+                },
+        };
     },
 });

@@ -29,6 +29,7 @@ import {RootState} from "@/lib/storage/store";
 import BannerImg from "@/components/admin/Forms/ImageSelect";
 import {faInfo, faSpinner} from "@fortawesome/free-solid-svg-icons";
 import {AnimatePresence, motion} from "framer-motion";
+import DOMPurify from "isomorphic-dompurify";
 
 function removeBrTags(str: string) {
     return str.replace(/<p><\/p>/g, "<br>");
@@ -317,7 +318,12 @@ function Page(props: {params: {id: string}}) {
                     publishPost({
                         id: props.params.id,
                         ...e,
-                        content: removeBrTags(editor.current.getHTML()),
+                        content: DOMPurify.sanitize(
+                            removeBrTags(editor.current.getHTML()),
+                            {
+                                ADD_TAGS: ["iframe", "twitter"],
+                            }
+                        ),
                     })
                         .then((e) => {
                             messageApi.open({
@@ -346,6 +352,7 @@ function Page(props: {params: {id: string}}) {
                 }
             })
             .catch((e) => {
+                console.log(e);
                 messageApi.open({
                     key: "publishing",
                     type: "error",
@@ -361,11 +368,11 @@ function Page(props: {params: {id: string}}) {
             content: t("posts.editForm.serverStatus.saving"),
         });
         setIsRequired(false);
-        console.log(removeBrTags(editor.current.getHTML()));
+        console.log(editor.current);
         savePost({
             id: props.params.id,
             ...infoPost.getFieldsValue(),
-            content: removeBrTags(editor.current.getHTML()),
+            content: editor.current.getHTML(),
         })
             .then((e) => {
                 messageApi.open({

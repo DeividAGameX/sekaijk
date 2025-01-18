@@ -22,6 +22,6 @@ export default function manifest(): MetadataRoute.Manifest {
         start_url: "/",
         display: "standalone",
         background_color: "#0a0a0a",
-        theme_color: "#ff0f80",
+        theme_color: "#D94862",
     };
 }

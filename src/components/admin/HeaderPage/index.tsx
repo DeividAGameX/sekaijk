@@ -29,7 +29,6 @@ export type HeaderPageProps = {
 };
 
 function HeaderPage({
-    children,
     filters,
     newElement,
     formItems,
@@ -40,14 +39,13 @@ function HeaderPage({
 
     return (
         <div className="w-full bg-body flex flex-col gap-3 p-5 rounded-xl md:flex-row">
-            <div className="w-4/12">{children}</div>
             <Form
                 name="formulario"
                 onFinish={onFinish}
                 className="flex flex-wrap md:flex-nowrap gap-3 w-full items-center justify-end"
             >
                 {formItems.search && (
-                    <div className="md:max-w-xlp7 w-full">
+                    <div className="md:max-w-xlp7 md:mr-12 w-full">
                         <Form.Item name="search" style={{margin: 0}}>
                             <Input
                                 size="large"
