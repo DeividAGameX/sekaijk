@@ -1,4 +1,4 @@
-import {LoginForm} from "@/components/auth";
+import {LoginForm} from "./components/LoginForm";
 
 type Props = {
     params: {["key"]: string};

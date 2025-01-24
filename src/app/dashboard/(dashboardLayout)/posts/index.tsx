@@ -1,6 +1,6 @@
 "use client";
 import HeaderPage from "@/components/admin/HeaderPage";
-import CreateForm from "@/components/admin/pages/posts/CreateForm";
+import PostForm from "./components/Form";
 import {useCreatePostMutation, useGetPostsQuery} from "@/lib/storage/Api/posts";
 import {setTitulo} from "@/lib/storage/Reducers/layout.reducer";
 import {Pagination} from "antd";
@@ -8,8 +8,8 @@ import {useRouter} from "next/navigation";
 import React, {useEffect, useMemo, useState} from "react";
 import {useDispatch} from "react-redux";
 import {AnimatePresence, motion} from "framer-motion";
-import LoadingPost from "@/components/admin/pages/posts/LoadingPost";
-import CardPost from "@/components/admin/pages/posts/CardPost";
+import LoadingPosts from "./components/Loading";
+import Card from "./components/Card";
 import {useGetCategoriesQuery} from "@/lib/storage/Api/categories";
 import {useTranslations} from "next-intl";
 
@@ -120,7 +120,7 @@ function App() {
             >
                 Total elementos: {data?.count ?? 0}
             </HeaderPage>
-            <CreateForm
+            <PostForm
                 open={modalOpen}
                 onClose={() => setModalOpen(false)}
                 onFinish={handleCreate}
@@ -136,7 +136,7 @@ function App() {
                             transition={{duration: 0.5}}
                             className="flex-1 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4"
                         >
-                            <LoadingPost />
+                            <LoadingPosts />
                         </motion.div>
                     ) : (
                         <motion.div
@@ -148,7 +148,7 @@ function App() {
                         >
                             <AnimatePresence mode="popLayout">
                                 {(data?.data ?? []).map((post: any) => (
-                                    <CardPost key={post.id} post={post} />
+                                    <Card key={post.id} post={post} />
                                 ))}
                             </AnimatePresence>
                         </motion.div>

@@ -1,7 +1,7 @@
 "use client";
 import {Category} from "@/types/public/Categories";
 import Link from "next/link";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {motion} from "framer-motion";
 import {useTranslations} from "next-intl";
 import {Button, Drawer} from "antd";
@@ -12,6 +12,7 @@ import {
     faInstagram,
     faTiktok,
 } from "@fortawesome/free-brands-svg-icons";
+// import Image from "next/image";
 
 function ItemNav({item}: {item: Category}) {
     const [isOver, setIsOver] = useState(false);
@@ -70,18 +71,11 @@ function AboutUsLink() {
 
 function HeaderPage({categories}: {categories: Category[]}) {
     const [drawerCollapsed, setDrawerCollapsed] = useState(false);
-    useEffect(() => {
-        // Cargar los widgets de Twitter
-        const twttr = (window as any).twttr;
-        if (twttr && twttr.widgets) {
-            twttr.widgets.load();
-        }
-    }, []);
     return (
         <nav className="w-full h-16 bg-body fixed z-10">
             <div className="max-w-7xl w-full mx-auto flex items-center justify-between h-full px-4">
                 <Link href="/" className="text-5xl hover:text-primary">
-                    <i className="icon-navbar"></i>
+                    <i className="icon-ajk"></i>
                 </Link>
                 <ul className="hidden gap-4 font-lato md:flex">
                     {categories?.map((category) => (

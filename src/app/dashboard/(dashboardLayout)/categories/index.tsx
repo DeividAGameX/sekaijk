@@ -1,70 +1,15 @@
 "use client";
 import HeaderPage from "@/components/admin/HeaderPage";
-import ModalForm from "@/components/admin/ModelForm";
 import {
-    useCreateCategoryMutation,
     useDeleteCategoryMutation,
     useGetCategoriesQuery,
-    useGetCategoryByIdQuery,
-    useUpdateCategoryMutation,
 } from "@/lib/storage/Api/categories";
 import {faEdit, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Button, Form, Input, Popconfirm, Table} from "antd";
+import {Button, Popconfirm, Table} from "antd";
 import {useTranslations} from "next-intl";
 import {useState} from "react";
-
-interface CategoriesFormType {
-    id?: number;
-    isOpen: boolean;
-    onClose: () => void;
-}
-
-function CategoriesForm({id, isOpen, onClose}: CategoriesFormType) {
-    const t = useTranslations("categories");
-    const {data: category, isFetching} = useGetCategoryByIdQuery(id, {
-        skip: !id,
-    });
-    const [createCategory] = useCreateCategoryMutation();
-    const [updateCategory] = useUpdateCategoryMutation();
-    const onSubmit = (e: any) => {
-        return id
-            ? updateCategory({id, ...e}).then(console.log)
-            : createCategory(e).then(console.log);
-    };
-
-    return (
-        <ModalForm
-            open={isOpen}
-            title={t("header")}
-            values={id ? category : null}
-            onFinish={onSubmit}
-            onCancel={onClose}
-            isLoading={isFetching}
-        >
-            <Form.Item
-                name={"name"}
-                label={t("form.nameLabel")}
-                rules={[
-                    {required: true, message: t("form.nameRequired")},
-                    {max: 150, message: t("form.nameMaxLength")},
-                ]}
-            >
-                <Input />
-            </Form.Item>
-            <Form.Item
-                name={"description"}
-                label={t("form.descriptionLabel")}
-                rules={[
-                    {required: true, message: t("form.descriptionRequired")},
-                    {max: 500, message: t("form.descriptionMaxLength")},
-                ]}
-            >
-                <Input.TextArea />
-            </Form.Item>
-        </ModalForm>
-    );
-}
+import CategoriesForm from "./components/CategoriesForm";
 
 function Categories() {
     const t = useTranslations("categories");

@@ -304,7 +304,6 @@ async function Posts({params}: Props) {
             },
         ],
     };
-    console.log(post.content);
     return (
         <article>
             <header
