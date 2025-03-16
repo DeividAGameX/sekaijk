@@ -40,11 +40,10 @@ export async function getRoleById(id: string): Promise<ReturnType> {
 
 export async function createRole(data: any): Promise<ReturnType> {
     try {
+        const {name, description} = data;
+        const body = {name, description}
         const role = await prisma.roles.create({
-            data: {
-                name: data.name,
-                description: data.description,
-            },
+            data: body,
         });
         if (data.Permissions) {
             await prisma.permissions.createMany({
