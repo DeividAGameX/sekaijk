@@ -43,6 +43,9 @@ model social {
 model Roles {
   id          Int           @id @default(autoincrement())
   name        String        @unique
+  description String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now()) @updatedAt
   users       Users[]
   Permissions Permissions[]
 }
@@ -79,14 +82,17 @@ model Categories {
   description String
   slug        String
   createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
   posts       Posts[]
 }
 
 model Tags {
-  id          Int     @id @default(autoincrement())
-  name        String  @unique
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
   color       String
   description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
   posts       Posts[]
 }
 

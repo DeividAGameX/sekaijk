@@ -43,6 +43,7 @@ export async function createRole(data: any): Promise<ReturnType> {
         const role = await prisma.roles.create({
             data: {
                 name: data.name,
+                description: data.description,
             },
         });
         if (data.Permissions) {
