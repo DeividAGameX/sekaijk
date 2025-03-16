@@ -51,11 +51,13 @@ model Roles {
 }
 
 model Permissions {
-  id          Int    @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
   permissions String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
   roleId      Int
-  role        Roles  @relation(fields: [roleId], references: [id])
+  role        Roles    @relation(fields: [roleId], references: [id])
 }
 
 model Posts {
