@@ -1,0 +1,218 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id                  Int              @id @default(autoincrement())
+  name                String           @unique
+  email               String           @unique
+  password            String
+  avatar              String
+  banner              String?
+  description         String?
+  slug                String?          @unique
+  rolesId             Int
+  publicOrder         Int?
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @default(now()) @updatedAt
+  Posts               Posts[]
+  Roles               Roles            @relation(fields: [rolesId], references: [id])
+  social              Social[]
+  UsersResources      UsersResources[]
+  CapReview           CapReview[]
+  TeamRoles           TeamRole[]
+  Notification        Notification[]   @relation("NotificationTo")
+  NotificationCreator Notification[]   @relation("NotificationCreator")
+}
+
+model Social {
+  id     Int    @id @default(autoincrement())
+  icon   String
+  url    String
+  userId Int
+  user   Users  @relation(fields: [userId], references: [id])
+}
+
+model Roles {
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  description String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now()) @updatedAt
+  users       Users[]
+  Permissions Permissions[]
+}
+
+model TeamRole {
+  id        Int      @id @default(autoincrement())
+  name      String
+  isSection Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  Users     Users[]
+}
+
+model Permissions {
+  id         Int      @id @default(autoincrement())
+  permission String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+  roleId     Int
+  role       Roles    @relation(fields: [roleId], references: [id])
+}
+
+model Posts {
+  id          Int         @id @default(autoincrement())
+  title       String
+  banner      String?
+  description String
+  body        String?
+  slug        String?     @unique
+  draftId     Int?
+  status      PostsStatus @default(DRAFT)
+  authorId    Int
+  categoryId  Int?
+  ytVideo     String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @default(now()) @updatedAt
+  author      Users       @relation(fields: [authorId], references: [id])
+  Categories  Categories? @relation(fields: [categoryId], references: [id])
+  Tags        Tags[]
+}
+
+model Categories {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String
+  slug        String   @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+  posts       Posts[]
+}
+
+model Tags {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  color       String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+  posts       Posts[]
+  Animes      Animes[]
+}
+
+model Animes {
+  id          Int         @id @default(autoincrement())
+  title       String
+  description String
+  body        String?
+  banner      String?
+  episodes    Int         @default(0)
+  slug        String?
+  draftId     Int?
+  postStatus  PostsStatus @default(DRAFT)
+  status      AnimeStatus @default(ONGOING)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @default(now()) @updatedAt
+  CapReview   CapReview[]
+  Tags        Tags[]
+}
+
+model CapReview {
+  id          Int         @id @default(autoincrement())
+  title       String
+  description String
+  banner      String?
+  body        String
+  animeId     Int
+  slug        String?     @unique
+  status      PostsStatus @default(DRAFT)
+  draftId     Int?
+  author      Int
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @default(now()) @updatedAt
+  Anime       Animes      @relation(fields: [animeId], references: [id])
+  Author      Users       @relation(fields: [author], references: [id])
+}
+
+model UsersResources {
+  id         Int          @id @default(autoincrement())
+  name       String
+  userId     Int
+  resourceId String
+  url        String
+  type       ResourceType @default(IMAGE)
+  user       Users        @relation(fields: [userId], references: [id])
+}
+
+model YtVideos {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  thumbnail   String
+  publishedAt DateTime
+  videoId     String
+  type_video  Int
+}
+
+model Notification {
+  id          String           @id @default(cuid())
+  title       String
+  message     String
+  type        NotificationType
+  link        String? // Ruta interna a redirigir
+  read        Boolean          @default(false)
+  dismissible Boolean          @default(true)
+  expiresAt   DateTime? // Si se desea que expire
+  createdAt   DateTime         @default(now())
+
+  // Relaciones
+  userId Int // Notificación individual
+  User   Users @relation("NotificationTo", fields: [userId], references: [id])
+
+  createdById Int? // Quién la creó (sistema o usuario)
+  CreatedBy   Users? @relation("NotificationCreator", fields: [createdById], references: [id])
+}
+
+enum AnimeStatus {
+  ONGOING
+  COMPLETED
+  CANCELLED
+}
+
+enum PostsStatus {
+  DRAFT
+  REVIEW
+  PUBLISHED
+  ARCHIVED
+}
+
+enum NotificationType {
+  INFO
+  WARNING
+  SUCCESS
+  ERROR
+  SYSTEM
+  POST_REVIEW
+  COMMENT
+  TAG
+  VIDEO
+}
+
+enum ResourceType {
+  VIDEO
+  AUDIO
+  DOCUMENT
+  IMAGE
+}

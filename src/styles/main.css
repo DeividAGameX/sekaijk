@@ -1,0 +1,147 @@
+@font-face {
+  font-family: "icomoon";
+  src: url("/fonts/icomoon.eot?1u772v");
+  src: url("/fonts/icomoon.eot?1u772v#iefix") format("embedded-opentype"), url("/fonts/icomoon.ttf?1u772v") format("truetype"), url("/fonts/icomoon.woff?1u772v") format("woff"), url("/fonts/icomoon.svg?1u772v#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+[class^=icon-], [class*=" icon-"] {
+  font-family: "icomoon" !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-ajk:before {
+  content: "\e900";
+}
+
+/* Importar las fuentes locales de Lato */
+@font-face {
+  font-family: "Lato";
+  src: url("/fonts/Lato-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Lato";
+  src: url("/fonts/Lato-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Lato";
+  src: url("/fonts/Lato-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/Roboto-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/Roboto-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/Roboto-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+:root {
+  --primary: #D94862;
+  --secondary: #F2A7C3;
+  --primary-body: #121212;
+  --secondary-body: #1f1f1f;
+  --secondary-red: #F24495;
+  --coral: #f2786d;
+  --light-gray: #eaeaea;
+  --medium-gray: #a9a9a9;
+  --dark-gray: #303030;
+  --neutral-gray: #4b4b4b;
+  --golden-yellow: #d1b53b;
+  --teal-green: #2a9d8f;
+  --white-text: #ffffff;
+  --text-jk: #D94862;
+  --text-hit-jk: #b03b54;
+  --text-hint-jk: #616161;
+  --bg-transparent: rgba($color: #121212, $alpha: 0.5);
+  --bg-img: "/assets/FondoPortada.jpg";
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --background-op: rgba(10, 10, 10, 0.85);
+  }
+}
+.tabla-jk .ant-table-wrapper {
+  height: 100%;
+}
+.tabla-jk .ant-table-wrapper .ant-spin-nested-loading {
+  height: 100%;
+}
+.tabla-jk .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.tabla-jk .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table {
+  height: 100%;
+  overflow: auto;
+}
+.tabla-jk .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table table {
+  min-width: 500px;
+}
+.tabla-jk .ant-table-wrapper-container {
+  height: 100%;
+}
+.tabla-jk .ant-table-wrapper-container-body {
+  height: 100%;
+  overflow: auto !important;
+}
+
+.tabla-jk-transparent .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table th {
+  background-color: transparent;
+}
+
+.postEditor {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+.postEditor .tiptap {
+  width: 100%;
+  height: auto;
+  outline: none !important;
+  overflow: auto;
+}
+
+.dashboardLayout .dashboardContent {
+  height: 100%;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  overflow: hidden auto;
+}
+.dashboardLayout .dashboardContent .ant-layout-content {
+  min-height: calc(100vh - 96px);
+  margin: 0 auto;
+  padding-bottom: 10px;
+  width: 100%;
+  max-width: min(100% - 1em, 1600px);
+  flex: 1;
+  position: relative;
+}

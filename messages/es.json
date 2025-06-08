@@ -1,0 +1,309 @@
+{
+    "errors": {
+        "account_not_found": "Usuario no encontrado",
+        "invalid_password": "Error al iniciar sesión",
+        "response": {
+            "uniqueConstraintFailed": {
+                "title": "Error en la solicitud",
+                "message": "Ya existe un elemento con el mismo nombre o el mismo código"
+            },
+            "nullConstraintFailed": {
+                "title": "Error en la solicitud",
+                "message": "El campo es obligatorio o un elemento se esta utilizando"
+            },
+            "uniqueConstraintViolation": {
+                "title": "Error en la solicitud",
+                "message": "Ya existe un elemento con el mismo nombre o el mismo código"
+            },
+            "foreignKeyConstraintFailed": {
+                "title": "Error en la solicitud",
+                "message": "No se puede eliminar un elemento que está relacionado con otros elementos"
+            },
+            "generalError": {
+                "title": "Error en la solicitud",
+                "message": "Ha ocurrido un error inesperado"
+            },
+            "integrityConstraintViolation": {
+                "title": "Error en la solicitud",
+                "message": "Ha ocurrido un error inesperado"
+            },
+            "serializationFailure": {
+                "title": "Error en la solicitud",
+                "message": "Ha ocurrido un error con la información"
+            },
+            "timeout": {
+                "title": "Error en la solicitud",
+                "message": "Se ha agotado el tiempo de espera"
+            },
+            "connectionTimeout": {
+                "title": "Error en la solicitud",
+                "message": "Se ha agotado el tiempo de espera"
+            },
+            "connectionFailure": {
+                "title": "Error en la solicitud",
+                "message": "No se puede conectar"
+            },
+            "undefinedTable": {
+                "title": "Error en la solicitud",
+                "message": "No existe la ruta"
+            },
+            "undefinedColumn": {
+                "title": "Error en la solicitud",
+                "message": "No se ha encontrado el campo"
+            },
+            "duplicateKeyValue": {
+                "title": "Error en la solicitud",
+                "message": "Ya existe un elemento con el mismo nombre o el mismo código"
+            },
+            "foreignKeyViolation": {
+                "title": "Error en la solicitud",
+                "message": "No se puede eliminar un elemento que está relacionado con otros elementos"
+            },
+            "invalidTextRepresentation": {
+                "title": "Error en la solicitud",
+                "message": "La información no se puede representar correctamente"
+            },
+            "notNullViolation": {
+                "title": "Error en la solicitud",
+                "message": "Campos obligatorios"
+            },
+            "stringDataRightTruncation": {
+                "title": "Error en la solicitud",
+                "message": "La información no se puede representar correctamente"
+            },
+            "numericValueOutOfRange": {
+                "title": "Error en la solicitud",
+                "message": "El valor no se encuentra dentro del rango permitido"
+            },
+            "unknownError": {
+                "title": "Error en la solicitud",
+                "message": "Ha ocurrido un error inesperado"
+            }
+        }
+    },
+    "auth": {
+        "form": {
+            "username": "Nombre de usuario",
+            "password": "Contraseña"
+        }
+    },
+    "routes": {
+        "dashboard": "Dashboard",
+        "categories": "Categorías",
+        "tags": "Etiquetas",
+        "posts": "Publicaciones",
+        "settings": "Ajustes",
+        "teams": "Role de equipo",
+        "users": "Usuarios",
+        "roles": "Roles",
+        "profile": "Perfil"
+    },
+    "components": {
+        "layout": {
+            "sideBar": {
+                "menu": {
+                    "posts": "Publicaciones",
+                    "categories": "Categorías",
+                    "tags": "Etiquetas",
+                    "settings": "Ajustes",
+                    "teams": "Role de equipo",
+                    "users": "Usuarios",
+                    "roles": "Roles"
+                }
+            }
+        },
+        "form": {
+            "save": "Guardar",
+            "create": "Crear",
+            "cancel": "Cancelar",
+            "error": {
+                "string": "El campo es requerido",
+                "require": "El campo es requerido",
+                "max150": "El Campo tiene que ser menor de 150 caracteres",
+                "max500": "El campo tiene que ser menor de 500 caracteres",
+                "required_if": "El campo es requerido si {0} es {1}",
+                "required_unless": "El campo es requerido a menos que {0} sea {1}",
+                "required_with": "El campo es requerido cuando {0} está presente",
+                "required_without_all": "El campo es requerido cuando ninguno de {0} está presente",
+                "confirmPassword": "Se requiere confirmar contraseña",
+                "password_match": "Las contraseñas no coinciden",
+                "image": "El campo debe ser una imagen"
+            },
+            "confirm": "Si",
+            "noConfirm": "No",
+            "preventOk": "No salir",
+            "preventCancel": "Si, salir"
+        },
+        "table": {
+            "name": "Nombre",
+            "description": "Descripción",
+            "createdAt": "Creación",
+            "updatedAt": "Actualización",
+            "actions": "Acciones",
+            "edit": "Editar categoría",
+            "delete": "Eliminar categoría",
+            "color": "Color"
+        }
+    },
+    "categories": {
+        "search": "Buscar categoría",
+        "add": "Agregar categoría",
+        "edit": "Editar categoría",
+        "delete": "Desea eliminar la categoría?",
+        "form": {
+            "title": "Categoría",
+            "name": "Nombre de la categoría",
+            "description": "Descripción de la categoría"
+        }
+    },
+    "tags": {
+        "search": "Buscar etiqueta",
+        "add": "Agregar etiqueta",
+        "edit": "Editar etiqueta",
+        "delete": "Desea eliminar la etiqueta?",
+        "form": {
+            "title": "Etiqueta",
+            "name": "Nombre",
+            "description": "Descripción",
+            "color": "Color"
+        }
+    },
+    "posts": {
+        "search": "Buscar publicación",
+        "add": "Agregar publicación",
+        "edit": "Editar publicación",
+        "delete": "Desea eliminar la publicación?",
+        "form": {
+            "title": "Título",
+            "description": "Descripción",
+            "banner": "Imagen de portada",
+            "publishedAt": "Fecha de publicación",
+            "DRAFT": "Borrador",
+            "REVIEW": "Revisión",
+            "PUBLISHED": "Publico",
+            "ARCHIVED": "Archivado",
+            "status": "Estado",
+            "content": "Contenido",
+            "category": "Categoría",
+            "tags": "Etiquetas",
+            "saveDraft": "Guardar borrador",
+            "publish": "Publicar publicación",
+            "review": "Revisar publicación",
+            "return": "Regresar"
+        },
+        "card": {
+            "unknown_category": "Categoría desconocida",
+            "DRAFT": "Borrador",
+            "REVIEW": "Revisión",
+            "PUBLISHED": "Publicado",
+            "ARCHIVED": "Archivado",
+            "status": "Estado",
+            "edit": "Editar publicación",
+            "delete": "Eliminar publicación",
+            "author": "Autor"
+        }
+    },
+    "teamRoles": {
+        "search": "Buscar role de equipo",
+        "add": "Agregar role de equipo",
+        "edit": "Editar role de equipo",
+        "delete": "Desea eliminar la role de equipo?",
+        "form": {
+            "title": "Role de equipo",
+            "name": "Nombre",
+            "isSection": "Es una sección?",
+            "yes": "Si",
+            "no": "No"
+        }
+    },
+    "users": {
+        "search": "Buscar usuario",
+        "add": "Agregar usuario",
+        "edit": "Editar usuario",
+        "delete": "Desea eliminar el usuario?",
+        "form": {
+            "title": "Usuario",
+            "name": "Nombre",
+            "email": "Correo electrónico",
+            "avatar": "Foto de perfil",
+            "password": "Contraseña",
+            "confirmPassword": "Confirmar contraseña",
+            "role": "Rol",
+            "team": "Rol de equipo",
+            "save": "Guardar usuario",
+            "cancel": "Cancelar"
+        }
+    },
+    "roles": {
+        "search": "Buscar rol",
+        "add": "Agregar rol",
+        "edit": "Editar rol",
+        "delete": "Desea eliminar el rol?",
+        "form": {
+            "title": "Rol",
+            "name": "Nombre",
+            "description": "Descripción",
+            "permissions": "Permisos"
+        },
+        "permissions": {
+            "@posts": "Publicaciones",
+            "@posts-all": "Ver todas las publicaciones",
+            "@post": "Ver publicación",
+            "@post-create": "Crear publicación",
+            "@post-update": "Editar publicación",
+            "@post-publish": "Publicar publicación",
+            "@post-review": "Revisar publicación",
+            "@post-delete": "Eliminar publicación",
+            "@categories": "Categorías",
+            "@category": "categoría",
+            "@category-create": "Crear categoría",
+            "@category-update": "Editar categoría",
+            "@category-delete": "Eliminar categoría",
+            "@tags": "Etiquetas",
+            "@tag": "Etiqueta",
+            "@tag-create": "Crear etiqueta",
+            "@tag-update": "Editar etiqueta",
+            "@tag-delete": "Eliminar etiqueta",
+            "@team-roles": "Roles de equipo",
+            "@team-role": "Rol de equipo",
+            "@team-role-create": "Crear rol de equipo",
+            "@team-role-update": "Editar rol de equipo",
+            "@team-role-delete": "Eliminar rol de equipo",
+            "@users": "Usuarios",
+            "@user": "Usuario",
+            "@user-create": "Crear usuario",
+            "@user-update": "Editar usuario",
+            "@user-delete": "Eliminar usuario",
+            "@roles": "Roles",
+            "@role": "Rol",
+            "@role-create": "Crear rol",
+            "@role-update": "Editar rol",
+            "@role-delete": "Eliminar rol"
+        }
+    },
+    "profile": {
+        "labels": {
+            "posts": "Publicaciones",
+            "info": "Información personal",
+            "secure": "Seguridad"
+        },
+        "goTo": "Ver",
+        "title": "Mi Perfil",
+        "name": "Nombre",
+        "email": "Correo electrónico",
+        "avatar": "Foto de Perfil",
+        "password": "Contraseña",
+        "social": "Redes sociales",
+        "passwordChanged": "Contraseña cambiada correctamente",
+        "changePasswordTitle": "Cambiar contraseña",
+        "newPassword": "Nueva contraseña",
+        "passwordRequired": "Se requiere la contraseña",
+        "currentPassword": "Contraseña actual",
+        "passwordUpdated": "Contraseña actualizada correctamente",
+        "passwordMismatch": "Contraseñas no coinciden",
+        "passwordTooShort": "La contraseña debe tener al menos 8 caracteres",
+        "confirmPassword": "Confirmar contraseña",
+        "save": "Guardar cambios",
+        "cancel": "Cancelar"
+    }
+}
