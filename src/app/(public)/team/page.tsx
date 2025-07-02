@@ -255,19 +255,20 @@ async function TeamPage() {
                 </section>
             ))}
             <section className="my-6">
-                <div className="relative h-64 rounded-xl overflow-hidden">
+                <div className="relative h-96 rounded-xl overflow-hidden md:h-64">
                     <Image
                         src="/assets/FondoPortada.jpg"
                         alt="Equipo de GameAnime Blog"
-                        fill
-                        className="object-cover"
+                        width={1080}
+                        height={720}
+                        className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-black/80 flex items-center justify-center">
                         <div className="text-center text-white p-6">
                             <h2 className="text-3xl font-bold mb-4">
                                 Síguenos en redes sociales
                             </h2>
-                            <div className="flex justify-center gap-4">
+                            <div className="flex justify-center gap-4 flex-col md:flex-row">
                                 <a
                                     href="https://www.youtube.com/@SekAiJK"
                                     target="_blank"

@@ -16,7 +16,7 @@ interface CarouselContentProps {
 
 function CarouselContent({posts, children}: Readonly<CarouselContentProps>) {
     return (
-        <div className="w-full h-screen relative overflow-hidden">
+        <div className="max-w-[1600px] w-full mx-auto min-h-[620px] mt-16 relative overflow-hidden rounded-2xl">
             <div className="w-full h-full relative">{children}</div>
             <CarouselControl posts={posts} />
         </div>

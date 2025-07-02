@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {motion} from "framer-motion";
 import Image from "next/image";
 import {RootState} from "@/lib/store/PublicStore";
+import {useEffect} from "react";
 
 interface CarouselControlProps {
     posts: {
@@ -26,6 +27,14 @@ interface CarouselControlProps {
 function CarouselControl({posts}: CarouselControlProps) {
     const {current} = useSelector((state: RootState) => state.carousel);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        const timeOut = setTimeout(() => {
+            dispatch(nextElement());
+        }, 15000);
+        return () => clearTimeout(timeOut);
+    }, [dispatch, current]);
+
     return (
         <div className="absolute w-full bottom-2 flex justify-center px-2">
             <div className="flex justify-center gap-4 items-center w-full p-2 rounded-2xl md:w-auto md:bg-neutral-950/50 md:backdrop-blur-2xl">

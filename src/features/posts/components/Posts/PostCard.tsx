@@ -46,7 +46,7 @@ function PostCard({
             className="bg-neutral-950 rounded-lg shadow-md overflow-hidden flex flex-col h-[450px]"
         >
             <Image
-                src={banner || "/assets/fondoPortada.jpg"}
+                src={banner || "/assets/FondoPortada.jpg"}
                 alt={title}
                 className="w-full max-h-48 h-48 object-cover"
                 preview={banner ? true : false}
