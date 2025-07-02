@@ -1,4 +1,4 @@
-import {config} from "@/app/api/auth/[...nextauth]/route";
+import {authOptions as config} from "@/utils/AuthOptions";
 import Unauthorized from "@/components/dashboard/Unauthorized";
 import RolForm from "@/features/roles/components/RoleForm";
 import RolesHeader from "@/features/roles/components/RolesHeader";

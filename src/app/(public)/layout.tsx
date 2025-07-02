@@ -1,9 +1,11 @@
 import {Metadata} from "next";
 import "../globals.css";
 import icon from "@/app/favicon.ico";
-import Script from "next/script";
 import {ThemeProvider} from "@/components/theme-provider";
-import {Toaster} from "@/components/ui/sonner";
+import PublicLayout from "@/components/layouts/public/PublicLayout";
+import {PublicStore} from "@/features/public/Providers/StoreProvider";
+import {Toaster} from "sonner";
+import Script from "next/script";
 
 export const metadata: Metadata = {
     title: "SekAiJK - Anime, Videojuegos y Cultura Geek",
@@ -35,20 +37,33 @@ export default async function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <Script
-                async={true}
-                src="https://platform.twitter.com/widgets.js"
-            />
             <body className="min-h-screen h-full w-full color-mint-500">
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="dark"
-                    enableSystem={false}
-                    disableTransitionOnChange
-                >
-                    {children}
-                    <Toaster />
-                </ThemeProvider>
+                <PublicStore>
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="dark"
+                        enableSystem={false}
+                        enableColorScheme={false}
+                        disableTransitionOnChange
+                    >
+                        <Toaster />
+                        <PublicLayout>{children}</PublicLayout>
+                    </ThemeProvider>
+                </PublicStore>
+                <Script
+                    strategy="lazyOnload"
+                    src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_MEASUREMENT_ID}`}
+                />
+                <Script id="google-analytics" strategy="lazyOnload">
+                    {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '${process.env.NEXT_PUBLIC_MEASUREMENT_ID}', {
+          page_path: window.location.pathname,
+        });
+      `}
+                </Script>
             </body>
         </html>
     );

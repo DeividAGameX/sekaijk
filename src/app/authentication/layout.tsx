@@ -1,6 +1,7 @@
 import {NextIntlClientProvider} from "next-intl";
 import {getMessages} from "next-intl/server";
-import "@/app/globals.css"
+import "@/app/globals.css";
+import {Toaster} from "@/components/ui/sonner";
 
 export default async function RootLayout({
     children,
@@ -11,6 +12,7 @@ export default async function RootLayout({
     return (
         <html lang="en">
             <body className="min-h-screen h-full w-full dark">
+                <Toaster />
                 <NextIntlClientProvider messages={messages}>
                     {children}
                 </NextIntlClientProvider>

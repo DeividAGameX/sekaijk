@@ -19,12 +19,16 @@ function FormPost({
     saveDraft,
     publish,
     review,
+    commentReview,
+    tempPublish,
 }: {
     control: Control<UpdatePost>;
     isDirty: boolean;
     saveDraft: () => void;
     publish: () => void;
     review: () => void;
+    commentReview?: string | null;
+    tempPublish?: boolean;
 }) {
     const {loading, validatePermission} = useUserSession();
     const {data: categories} = useGetAllCategoriesQuery("");
@@ -40,7 +44,7 @@ function FormPost({
                             label={tForm("title")}
                             control={control}
                         >
-                            <Input />
+                            <Input maxLength={80} />
                         </PostController>
                         <PostController
                             name="description"
@@ -111,7 +115,7 @@ function FormPost({
                         {tForm("saveDraft")}
                     </Button>
                     {!loading &&
-                        (validatePermission("@post-publish") ? (
+                        (validatePermission("@post-publish") || tempPublish ? (
                             <Button type="primary" block onClick={publish}>
                                 {tForm("publish")}
                             </Button>
@@ -124,6 +128,14 @@ function FormPost({
                         ))}
                 </div>
             </div>
+            {commentReview && (
+                <div className="py-2 px-3 mt-4 rounded-2xl bg-neutral-950">
+                    <div className="py-4 mb-1 border-b-[1px] border-b-neutral-800">
+                        <h2 className="text-xl">{tForm("reviewPending")}</h2>
+                    </div>
+                    <div className="py-2">{commentReview}</div>
+                </div>
+            )}
         </div>
     );
 }

@@ -5,6 +5,7 @@ import {validateErrorPrisma} from "@/utils/validateError";
 import {Prisma} from "@prisma/client";
 import SocialModel from "../lib/SocialModel";
 import {compileHtmlToMarkdown} from "@/utils/HtmlToMarkdown";
+import {revalidatePath} from "next/cache";
 
 export default async function updateProfile(
     id: number,
@@ -58,6 +59,8 @@ export default async function updateProfile(
                 description: compileHtmlToMarkdown(data.description ?? ""),
             },
         });
+        revalidatePath(`/team/${user.slug}`);
+        revalidatePath("/team");
         return [user, {status: 200}];
     } catch (error) {
         return validateErrorPrisma(

@@ -1,4 +1,4 @@
-import {config} from "@/app/api/auth/[...nextauth]/route";
+import {authOptions as config} from "@/utils/AuthOptions";
 import {validateCreate} from "@/features/posts/schemas/post.schema";
 import deleteUser from "@/features/users/service/delete.service";
 import editUser from "@/features/users/service/edit.service";
@@ -9,6 +9,7 @@ import {getServerSession} from "next-auth";
 import {NextRequest, NextResponse} from "next/server";
 
 export async function GET(_: NextRequest, {params}: params) {
+    const {id: idUser} = await params;
     const session = await getServerSession(config);
     if (!session)
         return NextResponse.json({message: "not-allow"}, {status: 401});
@@ -16,11 +17,12 @@ export async function GET(_: NextRequest, {params}: params) {
     const allowed = await validatePermission("@user", id);
     if (!allowed)
         return NextResponse.json({message: "not-allow"}, {status: 403});
-    const response = await getUser(parseInt(params.id));
+    const response = await getUser(parseInt(idUser));
     return NextResponse.json(...response);
 }
 
 export async function PUT(req: NextRequest, {params}: params) {
+    const {id: idUser} = await params;
     const session = await getServerSession(config);
     if (!session)
         return NextResponse.json({message: "not-allow"}, {status: 401});
@@ -33,11 +35,12 @@ export async function PUT(req: NextRequest, {params}: params) {
     if (isValid[1].status == 404) {
         return NextResponse.json(...isValid);
     }
-    const response = await editUser(parseInt(params.id), body);
+    const response = await editUser(parseInt(idUser), body);
     return NextResponse.json(...response);
 }
 
 export async function DELETE(_: NextRequest, {params}: params) {
+    const {id: idUser} = await params;
     const session = await getServerSession(config);
     if (!session)
         return NextResponse.json({message: "not-allow"}, {status: 401});
@@ -45,6 +48,6 @@ export async function DELETE(_: NextRequest, {params}: params) {
     const allowed = await validatePermission("@user-delete", id);
     if (!allowed)
         return NextResponse.json({message: "not-allow"}, {status: 403});
-    const response = await deleteUser(parseInt(params.id));
+    const response = await deleteUser(parseInt(idUser));
     return NextResponse.json(...response);
 }

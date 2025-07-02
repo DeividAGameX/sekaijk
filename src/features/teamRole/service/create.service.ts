@@ -3,6 +3,7 @@ import {TeamRole, TeamRoleForm} from "../types/teamRole";
 import TeamRoleModel from "../lib/TeamRoleModel";
 import {validateErrorPrisma} from "@/utils/validateError";
 import {Prisma} from "@prisma/client";
+import { revalidatePath } from "next/cache";
 
 export default async function createTeamRole(
     body: TeamRoleForm
@@ -11,6 +12,7 @@ export default async function createTeamRole(
         const teamRole = await TeamRoleModel.create({
             data: body,
         });
+        revalidatePath("/team");
         return [teamRole, {status: 200}];
     } catch (error) {
         return validateErrorPrisma(

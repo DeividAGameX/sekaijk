@@ -1,4 +1,4 @@
-import {config} from "@/app/api/auth/[...nextauth]/route";
+import {authOptions as config} from "@/utils/AuthOptions";
 import tagValidate from "@/features/tags/schemas/tag.schema";
 import deleteTag from "@/features/tags/service/delete.service";
 import editTag from "@/features/tags/service/edit.service";
@@ -9,6 +9,7 @@ import {getServerSession} from "next-auth";
 import {NextRequest, NextResponse} from "next/server";
 
 export async function GET(_: NextRequest, {params}: params) {
+    const {id: idTag} = await params;
     const session = await getServerSession(config);
     if (!session)
         return NextResponse.json({message: "not-allow"}, {status: 401});
@@ -16,11 +17,12 @@ export async function GET(_: NextRequest, {params}: params) {
     const allowed = await validatePermission("@tag", id);
     if (!allowed)
         return NextResponse.json({message: "not-allow"}, {status: 403});
-    const response = await getTag(parseInt(params.id));
+    const response = await getTag(parseInt(idTag));
     return NextResponse.json(...response);
 }
 
 export async function PUT(req: NextRequest, {params}: params) {
+    const {id: idTag} = await params;
     const session = await getServerSession(config);
     if (!session)
         return NextResponse.json({message: "not-allow"}, {status: 401});
@@ -33,11 +35,12 @@ export async function PUT(req: NextRequest, {params}: params) {
     if (isValid[1].status == 400) {
         return NextResponse.json(...isValid);
     }
-    const response = await editTag(parseInt(params.id), body);
+    const response = await editTag(parseInt(idTag), body);
     return NextResponse.json(...response);
 }
 
 export async function DELETE(_: NextRequest, {params}: params) {
+    const {id: idTag} = await params;
     const session = await getServerSession(config);
     if (!session)
         return NextResponse.json({message: "not-allow"}, {status: 401});
@@ -45,6 +48,6 @@ export async function DELETE(_: NextRequest, {params}: params) {
     const allowed = await validatePermission("@tag-delete", id);
     if (!allowed)
         return NextResponse.json({message: "not-allow"}, {status: 403});
-    const response = await deleteTag(parseInt(params.id));
+    const response = await deleteTag(parseInt(idTag));
     return NextResponse.json(...response);
 }

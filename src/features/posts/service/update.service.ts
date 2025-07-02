@@ -4,6 +4,7 @@ import PostModel from "@/features/posts/lib/PostModel";
 import {validateErrorPrisma} from "@/utils/validateError";
 import {Prisma} from "@prisma/client";
 import {compileHtmlToMarkdown} from "@/utils/HtmlToMarkdown";
+import PostReviewModel from "../lib/PostReviewModel";
 
 export default async function updatePost(
     id: number,
@@ -42,6 +43,24 @@ export default async function updatePost(
                 Tags: true,
             },
         });
+        let lastReview = await PostReviewModel.findFirst({
+            where: {
+                active: true,
+            },
+            orderBy: {
+                createdAt: "desc",
+            },
+        });
+        if (lastReview) {
+            lastReview = await PostReviewModel.update({
+                where: {
+                    id: lastReview.id,
+                },
+                data: {
+                    reviewBody: data.body ?? "",
+                },
+            });
+        }
         return [result, {status: 200}];
     } catch (error) {
         return validateErrorPrisma(

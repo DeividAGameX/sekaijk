@@ -78,13 +78,48 @@
             "unknownError": {
                 "title": "Error en la solicitud",
                 "message": "Ha ocurrido un error inesperado"
+            },
+            "formInvalid": {
+                "title": "Campos requeridos",
+                "message": "El formulario no es válido, los siguientes campos tienen problemas:",
+                "field": {
+                    "name": "Nombre",
+                    "title": "Titulo",
+                    "description": "Descripción",
+                    "color": "Color",
+                    "body": "Contenido",
+                    "banner": "Imagen de portada",
+                    "categoryId": "Categoría",
+                    "Tags": "Etiquetas",
+                    "isSection": "Es una sección?",
+                    "email": "Correo electrónico",
+                    "password": "Contraseña",
+                    "avatar": "Foto de Perfil",
+                    "rolesId": "Rol"
+                },
+                "code": {
+                    "string": "El campo es requerido",
+                    "require": "El campo es requerido",
+                    "max150": "El Campo tiene que ser menor de 150 caracteres",
+                    "max500": "El campo tiene que ser menor de 500 caracteres",
+                    "img": "Imagen requerida",
+                    "img-invalid": "Imagen inválida",
+                    "category": "Categoría requerida",
+                    "tags": "Etiquetas requeridas",
+                    "invalidColor": "Color inválido",
+                    "email": "Correo invalido",
+                    "min-password": "Contraseña tiene que ser mayor a 4 caracteres",
+                    "invalid-avatar": "Foto de perfil inválida"
+                }
             }
         }
     },
     "auth": {
         "form": {
             "username": "Nombre de usuario",
-            "password": "Contraseña"
+            "password": "Contraseña",
+            "loading": "iniciando sesión",
+            "success": "Has iniciado sesión correctamente"
         }
     },
     "routes": {
@@ -92,6 +127,7 @@
         "categories": "Categorías",
         "tags": "Etiquetas",
         "posts": "Publicaciones",
+        "review": "Revisar publicación",
         "settings": "Ajustes",
         "teams": "Role de equipo",
         "users": "Usuarios",
@@ -132,7 +168,8 @@
             "confirm": "Si",
             "noConfirm": "No",
             "preventOk": "No salir",
-            "preventCancel": "Si, salir"
+            "preventCancel": "Si, salir",
+            "success": "Operación exitosa"
         },
         "table": {
             "name": "Nombre",
@@ -189,6 +226,7 @@
             "saveDraft": "Guardar borrador",
             "publish": "Publicar publicación",
             "review": "Revisar publicación",
+            "reviewPending": "Revisión pendiente",
             "return": "Regresar"
         },
         "card": {
@@ -197,10 +235,40 @@
             "REVIEW": "Revisión",
             "PUBLISHED": "Publicado",
             "ARCHIVED": "Archivado",
+            "REJECT": "Revisión rechazada",
+            "READY": "Listo para publicación",
             "status": "Estado",
             "edit": "Editar publicación",
+            "review": "Revisar publicación",
             "delete": "Eliminar publicación",
             "author": "Autor"
+        },
+        "review": {
+            "title": "Revisar publicación",
+            "viewInfo": "Información de la publicación",
+            "submit": "Enviar revisión",
+            "cancel": "Cancelar revisión",
+            "success": "Revisión enviada exitosamente",
+            "approve": "Aprobar",
+            "reject": "Rechazar",
+            "type_comment": "Tipo de comentario",
+            "comments": "Comentarios",
+            "comment": "Comentario",
+            "error": {
+                "error": "Ha ocurrido un error al enviar la revisión",
+                "type_comment_required": "El tipo de comentario es requerido",
+                "has_comment": "No se puede aprobar la publicación, hay comentarios pendientes",
+                "comment_required": "El comentario es requerido"
+            },
+            "approve_step": {
+                "title": "Aprobar publicación",
+                "message": "¿Quieres publicarlo o solo aprobarlo?",
+                "success": "Publicación aprobada exitosamente",
+                "publish": "Publicaciones publicadas exitosamente",
+                "bt1": "Aprobar y publicar",
+                "bt2": "Aprobar sin publicar"
+            },
+            "history": "Historial de revisiones"
         }
     },
     "teamRoles": {
@@ -305,5 +373,12 @@
         "confirmPassword": "Confirmar contraseña",
         "save": "Guardar cambios",
         "cancel": "Cancelar"
+    },
+    "notifications": {
+        "title": "Notificaciones",
+        "empty": "No hay notificaciones",
+        "markAsRead": "Marcar como leídas",
+        "delete": "Eliminar notificaciones",
+        "deleteConfirmation": "¿Está seguro de eliminar todas las notificaciones?"
     }
 }

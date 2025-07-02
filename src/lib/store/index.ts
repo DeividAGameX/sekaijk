@@ -16,6 +16,7 @@ import {teamRoleApi} from "@/features/teamRole/lib/TeamRole.reducer";
 import {usersApi} from "@/features/users/lib/user.reducer";
 import {rolesApi} from "@/features/roles/lib/Roles.reducer";
 import {profileApi} from "@/features/profile/lib/Profile.reducer";
+import {notificationsApi} from "@/features/notifications/lib/Notifications.reducer";
 
 export const store = configureStore({
     reducer: {
@@ -38,6 +39,7 @@ export const store = configureStore({
         [usersApi.reducerPath]: usersApi.reducer,
         [rolesApi.reducerPath]: rolesApi.reducer,
         [profileApi.reducerPath]: profileApi.reducer,
+        [notificationsApi.reducerPath]: notificationsApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(
@@ -48,7 +50,8 @@ export const store = configureStore({
             teamRoleApi.middleware,
             usersApi.middleware,
             rolesApi.middleware,
-            profileApi.middleware
+            profileApi.middleware,
+            notificationsApi.middleware
         ),
 });
 

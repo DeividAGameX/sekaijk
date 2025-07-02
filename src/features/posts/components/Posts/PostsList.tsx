@@ -5,12 +5,14 @@ import PostCard from "./PostCard";
 
 interface PostListProps {
     canEdit: boolean;
+    canReview: boolean;
     canDelete: boolean;
 }
 
 function PostList(
-    {canEdit, canDelete}: PostListProps = {
+    {canEdit, canReview, canDelete}: PostListProps = {
         canEdit: false,
+        canReview: false,
         canDelete: false,
     }
 ) {
@@ -24,8 +26,9 @@ function PostList(
                             key={post.id}
                             {...post}
                             permissions={{
-                                canEdit: canEdit,
-                                canDelete: canDelete,
+                                canEdit,
+                                canReview,
+                                canDelete,
                             }}
                         />
                     ))}

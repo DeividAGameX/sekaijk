@@ -4,6 +4,7 @@ import UsersModel from "../lib/UsersModel";
 import {validateErrorPrisma} from "@/utils/validateError";
 import {Prisma} from "@prisma/client";
 import bcrypt from "bcrypt";
+import {revalidatePath} from "next/cache";
 
 export default async function editUser(
     id: number,
@@ -38,6 +39,8 @@ export default async function editUser(
                 },
             },
         });
+        revalidatePath(`/team/${user.slug}`);
+        revalidatePath("/team");
         return [user, {status: 200}];
     } catch (error) {
         return validateErrorPrisma(

@@ -37,6 +37,7 @@ import {
 import {RefObject, useState} from "react";
 import {faTwitter} from "@fortawesome/free-brands-svg-icons";
 import FileManager from "@/components/dashboard/FileManager";
+import {Comments} from "./Extensions/Comments";
 
 function InsertLink({
     open,
@@ -375,6 +376,22 @@ function MenuBar() {
                         icon={<FontAwesomeIcon icon={faTwitter} />}
                         onClick={() => setTwitterLink(true)}
                     />
+                    {/* <Button
+                        type="text"
+                        icon={<FontAwesomeIcon icon={faComment} />}
+                        onClick={() => {
+                            editor
+                                .chain()
+                                .focus()
+                                .addComment(
+                                    "0001",
+                                    "DeividAG",
+                                    "Este es un comentario normal",
+                                    "comment-delete"
+                                )
+                                .run();
+                        }}
+                    /> */}
                 </div>
                 {/* a */}
                 <InsertLink
@@ -457,6 +474,7 @@ const extensions = [
     Blockquote,
     Highlighter,
     TwitterEmbed,
+    Comments,
 ];
 
 function PostEditor({
@@ -479,8 +497,7 @@ function PostEditor({
             }}
             extensions={extensions}
             editorContainerProps={{
-                className:
-                    "postEditor w-full flex-1 flex px-4 article",
+                className: "postEditor w-full flex-1 flex px-4 article",
             }}
         />
     );

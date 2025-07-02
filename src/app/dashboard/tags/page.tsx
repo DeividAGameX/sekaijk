@@ -2,7 +2,7 @@ import TagsHeader from "@/features/tags/components/TagsHeader";
 import TagsTable from "@/features/tags/components/TagsTable";
 import TagForm from "@/features/tags/components/TagForm";
 import {getServerSession} from "next-auth";
-import {config} from "@/app/api/auth/[...nextauth]/route";
+import {authOptions as config} from "@/utils/AuthOptions";
 import validatePermission from "@/utils/ValidatePermissions";
 import Unauthorized from "@/components/dashboard/Unauthorized";
 

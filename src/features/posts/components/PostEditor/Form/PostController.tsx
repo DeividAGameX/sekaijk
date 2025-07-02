@@ -7,15 +7,39 @@ type PostControllerProps = UseControllerProps<UpdatePost> & {
     children: React.ReactElement;
 };
 
+function safeGet<T>(obj: T, path: string): unknown {
+    const parts = path.replace(/\[(\d+)\]/g, ".$1").split(".");
+
+    return parts.reduce<unknown>((acc, part) => {
+        if (acc && typeof acc === "object" && part in acc) {
+            return (acc as Record<string, unknown>)[part];
+        }
+        return undefined;
+    }, obj);
+}
+
 function PostController({children, label, ...props}: PostControllerProps) {
     return (
         <Controller
             name={props.name}
             control={props.control}
-            render={({field}) => (
+            render={({field, formState}) => (
                 <>
                     {label && <label>{label}</label>}
                     {React.cloneElement(children, {...field})}
+                    {(
+                        safeGet(formState.errors, props.name) as {
+                            message?: string;
+                        }
+                    )?.message && (
+                        <span className="text-red-500 text-sm pt-2">
+                            {(
+                                safeGet(formState.errors, props.name) as {
+                                    message?: string;
+                                }
+                            )?.message ?? ""}
+                        </span>
+                    )}
                 </>
             )}
         />

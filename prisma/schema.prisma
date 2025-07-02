@@ -14,26 +14,27 @@ datasource db {
 }
 
 model Users {
-  id                  Int              @id @default(autoincrement())
-  name                String           @unique
-  email               String           @unique
-  password            String
-  avatar              String
-  banner              String?
-  description         String?
-  slug                String?          @unique
-  rolesId             Int
-  publicOrder         Int?
-  createdAt           DateTime         @default(now())
-  updatedAt           DateTime         @default(now()) @updatedAt
-  Posts               Posts[]
-  Roles               Roles            @relation(fields: [rolesId], references: [id])
-  social              Social[]
-  UsersResources      UsersResources[]
-  CapReview           CapReview[]
-  TeamRoles           TeamRole[]
-  Notification        Notification[]   @relation("NotificationTo")
-  NotificationCreator Notification[]   @relation("NotificationCreator")
+  id               Int                @id @default(autoincrement())
+  name             String             @unique
+  email            String             @unique
+  password         String
+  avatar           String
+  banner           String?
+  description      String?
+  slug             String?            @unique
+  rolesId          Int
+  publicOrder      Int?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @default(now()) @updatedAt
+  Posts            Posts[]
+  Roles            Roles              @relation(fields: [rolesId], references: [id])
+  social           Social[]
+  UsersResources   UsersResources[]
+  CapReview        CapReview[]
+  TeamRoles        TeamRole[]
+  PostReviewAuthor PostsReview[]      @relation("PostReviewAuthor")
+  PostReviewEditor PostsReview[]      @relation("PostReviewEditor")
+  NotificationUser NotificationUser[]
 }
 
 model Social {
@@ -73,22 +74,39 @@ model Permissions {
 }
 
 model Posts {
-  id          Int         @id @default(autoincrement())
+  id          Int           @id @default(autoincrement())
   title       String
   banner      String?
   description String
   body        String?
-  slug        String?     @unique
+  slug        String?       @unique
   draftId     Int?
-  status      PostsStatus @default(DRAFT)
+  status      PostsStatus   @default(DRAFT)
   authorId    Int
   categoryId  Int?
   ytVideo     String?
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @default(now()) @updatedAt
-  author      Users       @relation(fields: [authorId], references: [id])
-  Categories  Categories? @relation(fields: [categoryId], references: [id])
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now()) @updatedAt
+  author      Users         @relation(fields: [authorId], references: [id])
+  Categories  Categories?   @relation(fields: [categoryId], references: [id])
   Tags        Tags[]
+  PostsReview PostsReview[]
+}
+
+model PostsReview {
+  id         String        @id @default(uuid())
+  postId     Int
+  reviewBody String
+  comment    String?
+  status     REVIEW_STATUS @default(PENDING)
+  active     Boolean       @default(true)
+  authorId   Int
+  editorId   Int?
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @default(now()) @updatedAt
+  author     Users         @relation("PostReviewAuthor", fields: [authorId], references: [id])
+  editor     Users?        @relation("PostReviewEditor", fields: [editorId], references: [id])
+  Posts      Posts         @relation(fields: [postId], references: [id])
 }
 
 model Categories {
@@ -167,22 +185,28 @@ model YtVideos {
 }
 
 model Notification {
-  id          String           @id @default(cuid())
-  title       String
-  message     String
-  type        NotificationType
-  link        String? // Ruta interna a redirigir
-  read        Boolean          @default(false)
-  dismissible Boolean          @default(true)
-  expiresAt   DateTime? // Si se desea que expire
-  createdAt   DateTime         @default(now())
+  id        String           @id @default(cuid())
+  title     String
+  message   String
+  type      NotificationType
+  targetUrl String?
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
 
-  // Relaciones
-  userId Int // Notificación individual
-  User   Users @relation("NotificationTo", fields: [userId], references: [id])
+  recipients NotificationUser[]
+}
 
-  createdById Int? // Quién la creó (sistema o usuario)
-  CreatedBy   Users? @relation("NotificationCreator", fields: [createdById], references: [id])
+model NotificationUser {
+  id             String    @id @default(cuid())
+  userId         Int
+  notificationId String
+  read           Boolean   @default(false)
+  readAt         DateTime?
+
+  user         Users        @relation(fields: [userId], references: [id])
+  notification Notification @relation(fields: [notificationId], references: [id])
+
+  @@unique([userId, notificationId])
 }
 
 enum AnimeStatus {
@@ -202,12 +226,19 @@ enum NotificationType {
   INFO
   WARNING
   SUCCESS
-  ERROR
   SYSTEM
   POST_REVIEW
-  COMMENT
-  TAG
+  POST_REVIEW_ACCEPTED
+  POST_REVIEW_CHANGED
+  POST_PUBLISHED
+  POST_ARCHIVED
   VIDEO
+}
+
+enum REVIEW_STATUS {
+  PENDING
+  APPROVED
+  REJECTED
 }
 
 enum ResourceType {

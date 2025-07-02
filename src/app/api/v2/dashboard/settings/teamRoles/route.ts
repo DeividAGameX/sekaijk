@@ -1,4 +1,4 @@
-import {config} from "@/app/api/auth/[...nextauth]/route";
+import {authOptions as config} from "@/utils/AuthOptions";
 import teamRoleValidate from "@/features/teamRole/schemas/teamRole.schema";
 import createTeamRole from "@/features/teamRole/service/create.service";
 import getAllTeamRole from "@/features/teamRole/service/getAll.service";

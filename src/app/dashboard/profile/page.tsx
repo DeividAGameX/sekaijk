@@ -1,4 +1,4 @@
-import {config} from "@/app/api/auth/[...nextauth]/route";
+import {authOptions as config} from "@/utils/AuthOptions";
 import Unauthorized from "@/components/dashboard/Unauthorized";
 import TabUser from "@/features/profile/components/TabsUser";
 import UserInfo from "@/features/profile/components/UserInfo";

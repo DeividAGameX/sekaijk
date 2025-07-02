@@ -1,4 +1,4 @@
-import {config} from "@/app/api/auth/[...nextauth]/route";
+import {authOptions as config} from "@/utils/AuthOptions";
 import tagValidate from "@/features/tags/schemas/tag.schema";
 import createTag from "@/features/tags/service/create.service";
 import getAllTags from "@/features/tags/service/getAll.service";
