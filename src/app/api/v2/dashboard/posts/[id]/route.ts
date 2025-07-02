@@ -1,4 +1,4 @@
-import {config} from "@/app/api/auth/[...nextauth]/route";
+import {authOptions as config} from "@/utils/AuthOptions";
 import {validateUpdate} from "@/features/posts/schemas/post.schema";
 import getPost from "@/features/posts/service/getOne.service";
 import updatePost from "@/features/posts/service/update.service";
@@ -8,6 +8,7 @@ import {getServerSession} from "next-auth";
 import {NextRequest, NextResponse} from "next/server";
 
 export async function GET(req: NextRequest, {params}: params) {
+    const {id: idPost} = await params;
     const session = await getServerSession(config);
     if (!session)
         return NextResponse.json({message: "not-allow"}, {status: 401});
@@ -15,11 +16,12 @@ export async function GET(req: NextRequest, {params}: params) {
     const allowed = await validatePermission("@post", id);
     if (!allowed)
         return NextResponse.json({message: "not-allow"}, {status: 403});
-    const response = await getPost(parseInt(params.id));
+    const response = await getPost(parseInt(idPost));
     return NextResponse.json(...response);
 }
 
 export async function PUT(req: NextRequest, {params}: params) {
+    const {id: idPost} = await params;
     const session = await getServerSession(config);
     if (!session)
         return NextResponse.json({message: "not-allow"}, {status: 401});
@@ -32,6 +34,6 @@ export async function PUT(req: NextRequest, {params}: params) {
     if (isValid[1].status == 400) {
         return NextResponse.json(...isValid);
     }
-    const response = await updatePost(parseInt(params.id), body);
+    const response = await updatePost(parseInt(idPost), body);
     return NextResponse.json(...response);
 }

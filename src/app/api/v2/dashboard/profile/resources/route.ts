@@ -1,4 +1,4 @@
-import {config} from "@/app/api/auth/[...nextauth]/route";
+import {authOptions as config} from "@/utils/AuthOptions";
 import getResource from "@/features/users/service/resources/getResource.service";
 import uploadResource from "@/features/users/service/resources/uploadResource.service";
 import {getServerSession} from "next-auth";

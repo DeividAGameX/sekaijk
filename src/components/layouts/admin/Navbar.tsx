@@ -1,3 +1,4 @@
+import Notifications from "@/features/notifications/components/Notifications";
 import {RootState} from "@/lib/store";
 import {toggleState} from "@/lib/store/features/layout/Sider.reducer";
 import {faCaretLeft, faCaretRight} from "@fortawesome/free-solid-svg-icons";
@@ -13,7 +14,9 @@ import {useDispatch, useSelector} from "react-redux";
 function DashboardNavbar() {
     const dispatch = useDispatch();
     const pathName = usePathname();
-    const {text: customText} = useSelector((state: RootState) => state.navBar);
+    const {text: customText, matchWith} = useSelector(
+        (state: RootState) => state.navBar
+    );
     const {open} = useSelector((state: RootState) => state.sideBar);
     const tPath = useTranslations("routes");
     const [title, setTitle] = useState("");
@@ -21,24 +24,35 @@ function DashboardNavbar() {
         return pathName
             .split("/")
             .map((p, i) => {
-                if (i == pathName.split("/").length - 1) {
+                let retText = tPath(p);
+                const ruta = pathName
+                    .split("/")
+                    .slice(0, i + 1)
+                    .join("/");
+                if (matchWith) {
+                    if (p === matchWith) {
+                        setTitle(customText ?? "");
+                        retText = customText ?? "";
+                    } else {
+                        retText = tPath(p);
+                    }
+                }
+                if (pathName.split("/").length - 1 == i && !customText) {
                     setTitle(p);
+                    retText = tPath(p);
                 }
                 return {
+                    className: "line-clamp-1",
                     title:
                         pathName.split("/").length - 1 == i ? (
-                            customText ?? tPath(p)
+                            retText ?? ""
                         ) : (
-                            <Link
-                                href={pathName.split("/").slice(0, i).join("/")}
-                            >
-                                {tPath(p)}
-                            </Link>
+                            <Link href={ruta}>{retText ?? ""}</Link>
                         ),
                 };
             })
             .slice(1);
-    }, [pathName, tPath, customText]);
+    }, [pathName, tPath, customText, matchWith]);
 
     const toggle = () => {
         dispatch(toggleState());
@@ -53,12 +67,13 @@ function DashboardNavbar() {
                     <FontAwesomeIcon icon={open ? faCaretRight : faCaretLeft} />
                 }
             />
-            <div className="w-full">
+            <div className="flex-1">
                 <Breadcrumb items={breadCrumb} />
-                <Typography.Title style={{margin: 0}}>
+                <Typography.Title style={{margin: 0}} className="line-clamp-1">
                     {customText ?? tPath(title)}
                 </Typography.Title>
             </div>
+            <Notifications />
         </nav>
     );
 }

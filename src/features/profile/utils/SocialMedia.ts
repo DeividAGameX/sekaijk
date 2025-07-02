@@ -30,6 +30,26 @@ export const SocialClass = {
     threads: "bg-threads",
 };
 
+export const SocialBgOutline = {
+    youtube:
+        "text-youtube border-2 border-youtube hover:text-white hover:bg-youtube transition duration-150",
+    facebook:
+        "text-facebook border-2 border-facebook hover:text-white hover:bg-facebook transition duration-150",
+    instagram:
+        "text-instagram border-2 border-instagram hover:text-white hover:bg-instagram transition duration-150",
+    twitter:
+        "text-twitter border-2 border-twitter hover:text-white hover:bg-twitter transition duration-150",
+    tiktok: "text-tiktok border-2 border-tiktok hover:text-white hover:bg-tiktok transition duration-150",
+    twitch: "text-twitch border-2 border-twitch hover:text-white hover:bg-twitch transition duration-150",
+    discord:
+        "text-discord border-2 border-discord hover:text-white hover:bg-discord transition duration-150",
+    reddit: "text-reddit border-2 border-reddit hover:text-white hover:bg-reddit transition duration-150",
+    spotify:
+        "text-spotify border-2 border-spotify hover:text-white hover:bg-spotify transition duration-150",
+    threads:
+        "text-threads border-2 border-threads hover:text-white hover:bg-threads transition duration-150",
+};
+
 export const SocialMedia: SocialOptions[] = [
     {
         label: "YouTube",

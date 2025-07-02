@@ -3,6 +3,7 @@ import {Category} from "@/features/categories/types/category";
 import categories from "@/features/categories/lib/CategoriesModel";
 import {validateErrorPrisma} from "@/utils/validateError";
 import {Prisma} from "@prisma/client";
+import {revalidatePath} from "next/cache";
 
 export default async function deleteCategories(
     id: number
@@ -13,6 +14,8 @@ export default async function deleteCategories(
                 id,
             },
         });
+        revalidatePath(`/${result.slug}`);
+        revalidatePath("/", "layout");
         return [result, {status: 200}];
     } catch (error) {
         return validateErrorPrisma(

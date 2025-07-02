@@ -2,7 +2,10 @@
 import DashboardTable from "@/components/dashboard/DashboarTable";
 import {Button, Popconfirm, TableColumnProps, Typography} from "antd";
 import {useTranslations} from "next-intl";
-import {useGetAllCategoriesQuery} from "@/features/categories/lib/Categories.reducer";
+import {
+    useDeleteCategoryMutation,
+    useGetAllCategoriesQuery,
+} from "@/features/categories/lib/Categories.reducer";
 import moment from "moment";
 import {useDispatch} from "react-redux";
 import {
@@ -22,6 +25,8 @@ function CategoriesTable(
     const tForm = useTranslations("components.form");
     const tCategory = useTranslations("categories");
     const {data, isFetching, isLoading} = useGetAllCategoriesQuery({});
+    const [deleteCategoryQuery, {isLoading: deleting}] =
+        useDeleteCategoryMutation();
     const dispatch = useDispatch();
     const columns: TableColumnProps[] = [
         {
@@ -103,14 +108,14 @@ function CategoriesTable(
     };
 
     const deleteCategory = (id: number) => {
-        console.log(id);
+        deleteCategoryQuery(id);
     };
 
     return (
         <div className="flex-1 flex py-4 overflow-hidden">
             <DashboardTable
                 columns={columns}
-                loading={isFetching || isLoading}
+                loading={isFetching || isLoading || deleting}
                 dataSource={data ?? []}
             />
         </div>

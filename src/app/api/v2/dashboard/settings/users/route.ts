@@ -1,10 +1,10 @@
-import {config} from "@/app/api/auth/[...nextauth]/route";
+import {authOptions as config} from "@/utils/AuthOptions";
 import userValidate from "@/features/users/schemas/user.schema";
 import createUser from "@/features/users/service/create.service";
 import getAllUsers from "@/features/users/service/getAll.service";
 import validatePermission from "@/utils/ValidatePermissions";
 import {getServerSession} from "next-auth";
-import {NextResponse} from "next/server";
+import {NextRequest, NextResponse} from "next/server";
 
 export async function GET() {
     const session = await getServerSession(config);
@@ -18,7 +18,7 @@ export async function GET() {
     return NextResponse.json(...response);
 }
 
-export async function POST(req: NextResponse) {
+export async function POST(req: NextRequest) {
     const session = await getServerSession(config);
     if (!session)
         return NextResponse.json({message: "not-allow"}, {status: 401});

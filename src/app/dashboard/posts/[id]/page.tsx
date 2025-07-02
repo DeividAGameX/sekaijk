@@ -1,7 +1,8 @@
-import {config} from "@/app/api/auth/[...nextauth]/route";
+import {authOptions as config} from "@/utils/AuthOptions";
 import Unauthorized from "@/components/dashboard/Unauthorized";
 import MainFormPost from "@/features/posts/components/PostEditor/MainForm";
 import PostModel from "@/features/posts/lib/PostModel";
+import PostReviewModel from "@/features/posts/lib/PostReviewModel";
 import {compileMarkdownToHtml} from "@/utils/MarkdownToHtml";
 import validatePermission from "@/utils/ValidatePermissions";
 import {getServerSession} from "next-auth";
@@ -28,10 +29,34 @@ async function PageEditor({params}: props) {
     if (!post) {
         return <div>Post not found</div>;
     }
-    // console.log(post.body);
-    post.body = compileMarkdownToHtml(post.body ?? "");
-    // post.body = post.body;
-    return <MainFormPost {...post} />;
+    const review = await PostReviewModel.findFirst({
+        where: {
+            postId: parseInt(id),
+            active: true,
+        },
+    });
+    let commentReview = null;
+    let tempPublish = false;
+    if (review) {
+        if (review.status === "REJECTED") {
+            post.body = review.reviewBody;
+            commentReview = review.comment;
+        }
+        if (review.status === "APPROVED") {
+            tempPublish = true;
+            post.body = compileMarkdownToHtml(post.body ?? "");
+        }
+        if (review.status === "PENDING") {
+            post.body = compileMarkdownToHtml(post.body ?? "");
+        }
+    } else {
+        post.body = compileMarkdownToHtml(post.body ?? "");
+    }
+    return (
+        <MainFormPost
+            {...{...post, commentReview: commentReview, tempPublish}}
+        />
+    );
 }
 
 export default PageEditor;

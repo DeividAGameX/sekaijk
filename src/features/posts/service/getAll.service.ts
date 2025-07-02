@@ -42,11 +42,7 @@ export default async function getAllPost(
         const data = await PostModel.findMany({
             where,
             include: {
-                Tags: {
-                    select: {
-                        name: true,
-                    },
-                },
+                Tags: true,
                 author: {
                     select: {
                         name: true,
@@ -56,6 +52,15 @@ export default async function getAllPost(
                 Categories: {
                     select: {
                         name: true,
+                    },
+                },
+                PostsReview: {
+                    where: {
+                        active: true,
+                    },
+                    take: 1,
+                    orderBy: {
+                        createdAt: "desc",
                     },
                 },
             },

@@ -1,4 +1,4 @@
-import {config} from "@/app/api/auth/[...nextauth]/route";
+import {authOptions as config} from "@/utils/AuthOptions";
 import profileValidate from "@/features/profile/schemas/profile.schema";
 import getProfile from "@/features/profile/service/getProfile.service";
 import updateProfile from "@/features/profile/service/updateData.service";

@@ -1,4 +1,4 @@
-import {config} from "@/app/api/auth/[...nextauth]/route";
+import {authOptions as config} from "@/utils/AuthOptions";
 import categoryValidate from "@/features/categories/schemas/category.schema";
 import createCategories from "@/features/categories/service/create.service";
 import getAllCategories from "@/features/categories/service/getAll.service";

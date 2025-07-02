@@ -6,13 +6,14 @@ import {useRouter} from "next/navigation";
 function Link({
     children,
     ...props
-}: React.AnchorHTMLAttributes<HTMLAnchorElement> & LinkProps &
+}: React.AnchorHTMLAttributes<HTMLAnchorElement> &
+    LinkProps &
     Readonly<{
         children: React.ReactNode;
     }>) {
     const [message, context] = Modal.useModal();
     const {onClick, ...args} = props;
-    const {state} = useLinkEvent();
+    const {state, handler} = useLinkEvent();
     const navigate = useRouter();
 
     const handleClick = async (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -48,8 +49,10 @@ function Link({
                 onCancel: () => {},
             });
             if (!result) {
-                console.log("Link click cancelled");
                 navigate.push(props.href as string);
+                handler({
+                    isPrevent: false,
+                });
             }
             // event.stopPropagation();
             // console.log("Prevented link click");

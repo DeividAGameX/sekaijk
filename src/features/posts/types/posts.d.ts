@@ -13,6 +13,7 @@ export interface Post {
     status: PostsStatus;
     authorId: number;
     categoryId?: number | null;
+    Tags?: Tag[] | null;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -58,4 +59,25 @@ export interface PatchPost {
     authorId?: number;
     categoryId?: number;
     Tags?: number[];
+}
+
+export interface PostReview {
+    id: string;
+    postId: number;
+    reviewBody: string;
+    comment?: string | null;
+    status: "PENDING" | "APPROVED" | "REJECTED";
+    authorId: number;
+    editorId?: number | null;
+    active: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+export interface PostReviewState {
+    isPublish?: boolean;
+    reviewBody: string;
+    comment: string | null;
+    status: "PENDING" | "APPROVED" | "REJECTED";
+    editorId?: number | null;
 }

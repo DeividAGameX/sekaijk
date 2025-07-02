@@ -1,6 +1,6 @@
 import AxiosBaseQuery from "@/lib/store/AxiosQuery";
 import {createApi} from "@reduxjs/toolkit/query/react";
-import {CreatePost, Post} from "../types/posts";
+import {CreatePost, Post, PostReview, PostReviewState} from "../types/posts";
 
 type PostData = Post & {
     author: {
@@ -10,6 +10,19 @@ type PostData = Post & {
     Categories: {
         name: string;
     };
+    PostsReview: [];
+};
+
+type PostReviewData = PostReview & {
+    editor: {
+        name: string;
+        avatar: string;
+    };
+};
+
+type PostReviewStateSend = PostReviewState & {
+    id: string;
+    postId: number;
 };
 
 interface PostsResponse {
@@ -21,7 +34,7 @@ interface PostsResponse {
 export const postsApi = createApi({
     reducerPath: "posts",
     baseQuery: AxiosBaseQuery,
-    tagTypes: ["posts", "post"],
+    tagTypes: ["posts", "post", "reviews"],
     endpoints: (builder) => ({
         getAllPosts: builder.query<PostsResponse, string>({
             query: (q: string) => ({
@@ -52,6 +65,37 @@ export const postsApi = createApi({
                 data: body,
             }),
         }),
+        publishPost: builder.mutation({
+            query: ({id, ...body}) => ({
+                url: `/posts/${id}/publish`,
+                method: "POST",
+                data: body,
+            }),
+            invalidatesTags: ["posts", "post", "reviews"],
+        }),
+        sendToReview: builder.mutation({
+            query: ({id, ...body}) => ({
+                url: `/posts/${id}/review`,
+                method: "POST",
+                data: body,
+            }),
+            invalidatesTags: ["posts", "reviews"],
+        }),
+        getReviews: builder.query<PostReviewData[], number>({
+            query: (id: number) => ({
+                url: `/posts/${id}/review`,
+                method: "GET",
+            }),
+            providesTags: ["reviews"],
+        }),
+        updateReview: builder.mutation<PostReview, PostReviewStateSend>({
+            query: ({postId, id, ...data}) => ({
+                url: `/posts/${postId}/review/${id}`,
+                method: "POST",
+                data: data,
+            }),
+            invalidatesTags: ["reviews"],
+        }),
     }),
 });
 
@@ -60,4 +104,8 @@ export const {
     useGetPostQuery,
     useCreatePostMutation,
     useUpdatePostMutation,
+    usePublishPostMutation,
+    useSendToReviewMutation,
+    useGetReviewsQuery,
+    useUpdateReviewMutation,
 } = postsApi;

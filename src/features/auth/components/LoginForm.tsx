@@ -1,6 +1,6 @@
 "use client";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faUser, faLock} from "@fortawesome/free-solid-svg-icons";
+import {faUser, faLock, faCircleNotch} from "@fortawesome/free-solid-svg-icons";
 import {useTranslations} from "next-intl";
 import {signIn} from "next-auth/react";
 import {useRouter} from "next/navigation";
@@ -9,9 +9,11 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {LoginSchema, loginSchema} from "@/features/auth/schema/login.schema";
 import {Button} from "@/components/ui/button";
 import {toast} from "sonner";
+import {useState} from "react";
 
 export function LoginForm({callback}: {callback: string}) {
     const t = useTranslations("auth.form");
+    const [loading, setLoading] = useState(false);
     const tErrors = useTranslations("errors");
     const {control, handleSubmit} = useForm<LoginSchema>({
         resolver: zodResolver(loginSchema),
@@ -19,13 +21,16 @@ export function LoginForm({callback}: {callback: string}) {
     const router = useRouter();
 
     const onFinish = (event: LoginSchema) => {
-        console.log(event);
+        setLoading(true);
+        toast.loading("Loading...", {id: "login-toast"});
         signIn("credentials", {...event, redirect: false}).then((e) => {
             if (!e?.ok) {
-                toast.error(tErrors(e?.error ?? ""));
+                toast.error(tErrors(e?.error ?? ""), {id: "login-toast"});
+                setLoading(false);
                 return;
             }
             if (callback) {
+                toast.success(t("success"), {id: "login-toast"});
                 router.replace(callback);
             }
         });
@@ -77,8 +82,18 @@ export function LoginForm({callback}: {callback: string}) {
                         </div>
                     )}
                 />
-                <Button type="submit" className="w-full my-2">
-                    Iniciar sesión
+                <Button
+                    type="submit"
+                    className="w-full my-2"
+                    disabled={loading}
+                >
+                    {loading ? (
+                        <div className="animate-spin flex justify-center items-center">
+                            <FontAwesomeIcon icon={faCircleNotch} />
+                        </div>
+                    ) : (
+                        "Iniciar sesión"
+                    )}
                 </Button>
             </form>
         </div>

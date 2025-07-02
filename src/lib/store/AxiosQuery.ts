@@ -1,4 +1,4 @@
-import {ExtendedSession} from "@/app/api/auth/[...nextauth]/route";
+import {ExtendedSession} from "@/utils/AuthOptions";
 import axios, {AxiosError} from "axios";
 import {getSession} from "next-auth/react";
 

@@ -1,4 +1,4 @@
-import {config} from "@/app/api/auth/[...nextauth]/route";
+import {authOptions as config} from "@/utils/AuthOptions";
 import roleValidate from "@/features/roles/schemas/role.schema";
 import deleteRol from "@/features/roles/service/delete.service";
 import editRol from "@/features/roles/service/edit.service";
@@ -9,6 +9,7 @@ import {getServerSession} from "next-auth";
 import {NextRequest, NextResponse} from "next/server";
 
 export async function GET(_: NextRequest, {params}: params) {
+    const {id: idRol} = await params;
     const session = await getServerSession(config);
     if (!session)
         return NextResponse.json({message: "not-allow"}, {status: 401});
@@ -16,11 +17,12 @@ export async function GET(_: NextRequest, {params}: params) {
     const allowed = await validatePermission("@role", id);
     if (!allowed)
         return NextResponse.json({message: "not-allow"}, {status: 403});
-    const response = await getRol(parseInt(params.id));
+    const response = await getRol(parseInt(idRol));
     return NextResponse.json(...response);
 }
 
 export async function PUT(req: NextRequest, {params}: params) {
+    const {id: idRol} = await params;
     const session = await getServerSession(config);
     if (!session)
         return NextResponse.json({message: "not-allow"}, {status: 401});
@@ -33,12 +35,13 @@ export async function PUT(req: NextRequest, {params}: params) {
     if (isValid[1].status == 400) {
         return NextResponse.json(...isValid);
     }
-    console.log(parseInt(params.id));
-    const response = await editRol(parseInt(params.id), body);
+    console.log(parseInt(idRol));
+    const response = await editRol(parseInt(idRol), body);
     return NextResponse.json(...response);
 }
 
 export async function DELETE(_: NextRequest, {params}: params) {
+    const {id: idRol} = await params;
     const session = await getServerSession(config);
     if (!session)
         return NextResponse.json({message: "not-allow"}, {status: 401});
@@ -46,6 +49,6 @@ export async function DELETE(_: NextRequest, {params}: params) {
     const allowed = await validatePermission("@role-delete", id);
     if (!allowed)
         return NextResponse.json({message: "not-allow"}, {status: 403});
-    const response = await deleteRol(parseInt(params.id));
+    const response = await deleteRol(parseInt(idRol));
     return NextResponse.json(...response);
 }

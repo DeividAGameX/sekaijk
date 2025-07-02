@@ -3,6 +3,7 @@ import {TeamRole} from "../types/teamRole";
 import TeamRoleModel from "../lib/TeamRoleModel";
 import {validateErrorPrisma} from "@/utils/validateError";
 import {Prisma} from "@prisma/client";
+import {revalidatePath} from "next/cache";
 
 export default async function deleteTeamRole(
     id: number
@@ -13,6 +14,7 @@ export default async function deleteTeamRole(
                 id,
             },
         });
+        revalidatePath("/team");
         return [teamRole, {status: 200}];
     } catch (error) {
         return validateErrorPrisma(

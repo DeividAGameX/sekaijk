@@ -1,4 +1,4 @@
-import {config} from "@/app/api/auth/[...nextauth]/route";
+import {authOptions as config} from "@/utils/AuthOptions";
 import {validateCreate} from "@/features/posts/schemas/post.schema";
 import createPost from "@/features/posts/service/create.service";
 import getAllPost from "@/features/posts/service/getAll.service";

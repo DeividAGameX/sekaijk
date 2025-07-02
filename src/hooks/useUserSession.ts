@@ -23,21 +23,10 @@ function useUserSession() {
     const [user, setUser] = useState<UserProvider | null>();
     const [loading, setLoading] = useState(true);
     const {data, status} = useSession();
-    // const validatePermission = (
-    //     permission: string,
-    //     up: UserProvider | null | undefined
-    // ) => {
-    //     if (!up) return false;
-    //     console.log(up.Role.Permissions);
-    //     const userPermissions = up.Role.Permissions.map((p) => p.permission);
-    //     return userPermissions.some((p) => p === permission);
-    // };
 
     const validatePermission = useCallback(
         (permission: string) => {
-            console.log(user);
             if (!user) return false;
-            console.log(user.Roles.Permissions);
             const userPermissions = user.Roles.Permissions.map(
                 (p) => p.permission
             );
