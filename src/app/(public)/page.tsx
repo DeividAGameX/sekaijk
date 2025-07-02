@@ -188,7 +188,7 @@ export default async function Home() {
             <CarouselContent posts={carousel}>
                 {carousel.map((post, i) => (
                     <CarouselItem key={post.slug} index={i}>
-                        <article className="relative w-full h-screen">
+                        <article className="relative w-full h-[620px]">
                             <Image
                                 src={post.banner ?? ""}
                                 alt={post.title}
@@ -216,9 +216,9 @@ export default async function Home() {
                                             </p>
                                             <Link
                                                 href={`/${post.Categories?.slug}/${post.slug}`}
-                                                className="text-primary border-primary border-2 rounded-lg py-1 px-2 hover:text-white hover:bg-primary transition duration-150"
+                                                className="bg-primary rounded-lg py-1 px-2 hover:bg-primary/90 transition duration-150"
                                             >
-                                                <p>Read More</p>
+                                                <p>Leer publicación</p>
                                             </Link>
                                         </div>
                                     </div>

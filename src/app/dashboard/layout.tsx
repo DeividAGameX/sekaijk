@@ -1,5 +1,6 @@
 import {Metadata} from "next";
 import "../globals.css";
+import "../../styles/main.css";
 import icon from "@/app/favicon.ico";
 import {NextIntlClientProvider} from "next-intl";
 import {getMessages} from "next-intl/server";
