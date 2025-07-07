@@ -29,6 +29,7 @@ model Users {
   Posts            Posts[]
   Roles            Roles              @relation(fields: [rolesId], references: [id])
   social           Social[]
+  FoldersResources UsersFolders[]
   UsersResources   UsersResources[]
   CapReview        CapReview[]
   TeamRoles        TeamRole[]
@@ -43,6 +44,58 @@ model Social {
   url    String
   userId Int
   user   Users  @relation(fields: [userId], references: [id])
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  title     String
+  message   String
+  type      NotificationType
+  targetUrl String?
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  recipients NotificationUser[]
+}
+
+model NotificationUser {
+  id             String    @id @default(cuid())
+  userId         Int
+  notificationId String
+  read           Boolean   @default(false)
+  readAt         DateTime?
+
+  user         Users        @relation(fields: [userId], references: [id])
+  notification Notification @relation(fields: [notificationId], references: [id])
+
+  @@unique([userId, notificationId])
+}
+
+model UsersFolders {
+  id        String           @id @default(cuid())
+  name      String
+  parentId  String?
+  usersId   Int
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  Resources UsersResources[]
+  Users     Users            @relation(fields: [usersId], references: [id])
+  parent    UsersFolders?    @relation("FolderToSubfolder", fields: [parentId], references: [id])
+  children  UsersFolders[]   @relation("FolderToSubfolder")
+}
+
+model UsersResources {
+  id             Int           @id @default(autoincrement())
+  name           String
+  userId         Int
+  resourceId     String
+  url            String
+  usersFoldersId String?
+  cratedAt       DateTime      @default(now())
+  updatedAt      DateTime      @default(now()) @updatedAt
+  type           ResourceType  @default(IMAGE)
+  user           Users         @relation(fields: [userId], references: [id])
+  UsersFolders   UsersFolders? @relation(fields: [usersFoldersId], references: [id])
 }
 
 model Roles {
@@ -164,16 +217,6 @@ model CapReview {
   Author      Users       @relation(fields: [author], references: [id])
 }
 
-model UsersResources {
-  id         Int          @id @default(autoincrement())
-  name       String
-  userId     Int
-  resourceId String
-  url        String
-  type       ResourceType @default(IMAGE)
-  user       Users        @relation(fields: [userId], references: [id])
-}
-
 model YtVideos {
   id          Int      @id @default(autoincrement())
   title       String
@@ -182,31 +225,6 @@ model YtVideos {
   publishedAt DateTime
   videoId     String
   type_video  Int
-}
-
-model Notification {
-  id        String           @id @default(cuid())
-  title     String
-  message   String
-  type      NotificationType
-  targetUrl String?
-  createdAt DateTime         @default(now())
-  updatedAt DateTime         @updatedAt
-
-  recipients NotificationUser[]
-}
-
-model NotificationUser {
-  id             String    @id @default(cuid())
-  userId         Int
-  notificationId String
-  read           Boolean   @default(false)
-  readAt         DateTime?
-
-  user         Users        @relation(fields: [userId], references: [id])
-  notification Notification @relation(fields: [notificationId], references: [id])
-
-  @@unique([userId, notificationId])
 }
 
 enum AnimeStatus {

@@ -86,7 +86,7 @@ function AvatarComponent({
                 )}
             </div>
             <FileManager
-                accept="IMAGE"
+                accept={["IMAGE"]}
                 isOpen={isOpen}
                 onClose={() => setIsOpen(false)}
                 selectResource={(e) => {

@@ -16,6 +16,7 @@ import useUserSession from "@/hooks/useUserSession";
 function FormPost({
     control,
     isDirty,
+    category,
     saveDraft,
     publish,
     review,
@@ -24,6 +25,7 @@ function FormPost({
 }: {
     control: Control<UpdatePost>;
     isDirty: boolean;
+    category: number;
     saveDraft: () => void;
     publish: () => void;
     review: () => void;
@@ -99,7 +101,15 @@ function FormPost({
                         label={tForm("banner")}
                         control={control}
                     >
-                        <BannerComponent />
+                        <BannerComponent
+                            categoryName={
+                                (
+                                    (categories ?? []).find(
+                                        (e: Category) => e.id == category
+                                    ) ?? {name: ""}
+                                ).name
+                            }
+                        />
                     </PostController>
                 </div>
                 <div className="flex flex-col items-center gap-2 my-3 w-full md:flex-col 2xl:flex-row">

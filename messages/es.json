@@ -180,6 +180,20 @@
             "edit": "Editar categoría",
             "delete": "Eliminar categoría",
             "color": "Color"
+        },
+        "generator": {
+            "title": "Generador de imagen",
+            "generate": "Crear imagen",
+            "field": {
+                "template": "Diseño",
+                "text1": "Texto principal",
+                "text1Required": "Texto principal requerido",
+                "text2": "Texto secundario",
+                "img1": "Imagen principal",
+                "img2": "Imagen de fondo o secundaria",
+                "submit": "Generar imagen"
+            },
+            "save": " Guardar imagen"
         }
     },
     "categories": {
@@ -377,7 +391,9 @@
     "notifications": {
         "title": "Notificaciones",
         "empty": "No hay notificaciones",
+        "refresh": "Actualizar",
         "markAsRead": "Marcar como leídas",
+        "markAsReadAll": "Marcar todas como leídas",
         "delete": "Eliminar notificaciones",
         "deleteConfirmation": "¿Está seguro de eliminar todas las notificaciones?"
     }

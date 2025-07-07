@@ -22,6 +22,9 @@ function DashboardDrawer() {
                     background: "#0a0a0a",
                 },
             }}
+            classNames={{
+                body: "relative",
+            }}
         >
             <UserSider />
             <MenuItems isDrawer />

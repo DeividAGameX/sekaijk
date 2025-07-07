@@ -20,7 +20,7 @@ function DashboardSider() {
             breakpoint="lg"
             collapsedWidth={isBreak ? 0 : "120"}
             onBreakpoint={changeBreak}
-            className={isBreak ? "p-0" : "py-1 px-4"}
+            className={`${isBreak ? "p-0" : "py-1 px-4"} relative`}
         >
             <UserSider />
             <MenuItems />

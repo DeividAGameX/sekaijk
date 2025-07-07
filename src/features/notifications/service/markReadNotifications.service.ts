@@ -10,6 +10,7 @@ export default async function markReadNotifications(
         const notification = await NotificationUserModel.updateMany({
             where: {
                 userId,
+                read: false,
             },
             data: {
                 read: true,

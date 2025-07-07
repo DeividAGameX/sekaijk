@@ -1,13 +1,16 @@
 import {
     faBell,
     faCheck,
+    faCheckDouble,
     faClock,
+    faRefresh,
     faUpRightFromSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Badge, Button, Dropdown, Empty, Spin} from "antd";
 import {
     useGetNotificationsQuery,
+    useMarkAllReadMutation,
     useMarkReadMutation,
 } from "../lib/Notifications.reducer";
 import {useTranslations} from "next-intl";
@@ -48,6 +51,7 @@ function NotificationComponent({
     onMarkRead,
 }: NotificationComponentProps) {
     const [isLoading, setIsLoading] = useState(false);
+    const tNotifications = useTranslations("notifications");
 
     const markRead = async () => {
         setIsLoading(true);
@@ -93,6 +97,7 @@ function NotificationComponent({
                 size="small"
                 onClick={markRead}
                 disabled={isLoading}
+                title={tNotifications("markAsRead")}
             >
                 {isLoading ? <Spin /> : <FontAwesomeIcon icon={faCheck} />}
             </Button>
@@ -103,6 +108,7 @@ function NotificationComponent({
 function Notifications() {
     const {isLoading, data, refetch} = useGetNotificationsQuery(null);
     const [markRead, {error}] = useMarkReadMutation();
+    const [markAsReadAll] = useMarkAllReadMutation();
     const tNotifications = useTranslations("notifications");
     const pathName = usePathname();
     const onMarkRead = async (id: string) => {
@@ -123,37 +129,85 @@ function Notifications() {
                 items: [],
             }}
             dropdownRender={() => (
-                <div className="max-w-sm w-full min-w-sm bg-neutral-800 rounded-lg py-2 px-3 overflow-hidden">
-                    <div className="w-full pb-2 px-3 border-b-2 border-neutral-600 flex justify-between items-center">
-                        <h3 className="text-lg text-white">
-                            {tNotifications("title")}
-                        </h3>
-                        <div className="px-2 py-1 rounded-full bg-neutral-900">
-                            {data?.length}
+                <div className="max-w-sm w-full min-w-sm bg-neutral-800 rounded-lg py-4 px-3 overflow-hidden">
+                    <div className="w-full py-2 px-3 border-b-2 border-neutral-600 flex justify-between items-center">
+                        <div className="flex items-center gap-2">
+                            <h3 className="text-lg w-full text-white font-bold font-lato">
+                                {tNotifications("title")}
+                            </h3>
+                            <span className="w-5 h-5 p-3 text-sm flex justify-center items-center rounded-full bg-neutral-900">
+                                {data?.length}
+                            </span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <Button
+                                type="text"
+                                size="small"
+                                onClick={refetch}
+                                className="text-white"
+                                title={tNotifications("refresh")}
+                            >
+                                <FontAwesomeIcon icon={faRefresh} />
+                            </Button>
+                            <Button
+                                type="text"
+                                size="small"
+                                onClick={markAsReadAll}
+                                className="text-white"
+                                title={tNotifications("markAsReadAll")}
+                            >
+                                <FontAwesomeIcon icon={faCheckDouble} />
+                            </Button>
                         </div>
                     </div>
-                    <div className="w-full max-h-80">
+                    <div className="w-full max-h-80 overflow-y-auto overflow-x-hidden">
                         <AnimatePresence>
                             {data ? (
                                 data.length > 0 ? (
-                                    (data ?? []).map((d, i) => (
+                                    (data ?? []).map((d) => (
                                         <NotificationComponent
-                                            key={i}
+                                            key={d.id}
                                             {...d.notification}
                                             onMarkRead={onMarkRead}
                                         />
                                     ))
                                 ) : (
-                                    <Empty
-                                        image={Empty.PRESENTED_IMAGE_SIMPLE}
-                                        description={false}
-                                    />
+                                    <motion.div
+                                        key={"empty"}
+                                        variants={{
+                                            initial: {x: "384px"},
+                                            animate: {x: 0},
+                                            exit: {x: "384px"},
+                                        }}
+                                        initial="initial"
+                                        animate="animate"
+                                        exit="exit"
+                                    >
+                                        <Empty
+                                            image={Empty.PRESENTED_IMAGE_SIMPLE}
+                                            description={tNotifications(
+                                                "empty"
+                                            )}
+                                        />
+                                    </motion.div>
                                 )
                             ) : (
-                                <Empty
-                                    image={Empty.PRESENTED_IMAGE_SIMPLE}
-                                    description={false}
-                                />
+                                <motion.div
+                                    key={"empty"}
+                                    variants={{
+                                        initial: {x: "384px"},
+                                        animate: {x: 0},
+                                        exit: {x: "384px"},
+                                    }}
+                                    initial="initial"
+                                    animate="animate"
+                                    exit="exit"
+                                >
+                                    <Empty
+                                        image={Empty.PRESENTED_IMAGE_SIMPLE}
+                                        description={tNotifications("empty")}
+                                    />
+                                </motion.div>
                             )}
                         </AnimatePresence>
                     </div>

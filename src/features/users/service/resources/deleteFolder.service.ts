@@ -1,16 +1,19 @@
 import {RespCommon} from "@/types/Resp";
-import ResourceModel from "../../lib/ResourceModel";
-import {UserResource} from "../../types/userResource";
+import {FolderResource} from "../../types/userResource";
+import FolderModel from "../../lib/FolderModel";
 import {validateErrorPrisma} from "@/utils/validateError";
 import {Prisma} from "@prisma/client";
 
-export default async function uploadResource(
-    body: UserResource
-): Promise<[UserResource | RespCommon, ResponseInit]> {
+export default async function deleteFolder(
+    id: string
+): Promise<[FolderResource | RespCommon, ResponseInit]> {
     try {
-        const userResource = await ResourceModel.create({
-            data: body,
+        const userResource = await FolderModel.delete({
+            where: {
+                id,
+            },
         });
+
         return [userResource, {status: 200}];
     } catch (error) {
         console.log(error);
