@@ -53,6 +53,7 @@ function MainFormPost({
         control,
         handleSubmit,
         setError,
+        getValues,
         formState: {isDirty},
     } = useForm<UpdatePost>({
         defaultValues: {
@@ -150,6 +151,7 @@ function MainFormPost({
             <FormPost
                 control={control}
                 isDirty={isDirty}
+                category={getValues("categoryId") ?? 0}
                 saveDraft={handleSubmit(submit)}
                 publish={handleSubmit(publish)}
                 review={handleSubmit(review)}

@@ -24,7 +24,7 @@ function DashboardNavbar() {
         return pathName
             .split("/")
             .map((p, i) => {
-                let retText = tPath(p);
+                let retText = "";
                 const ruta = pathName
                     .split("/")
                     .slice(0, i + 1)
@@ -34,12 +34,12 @@ function DashboardNavbar() {
                         setTitle(customText ?? "");
                         retText = customText ?? "";
                     } else {
-                        retText = tPath(p);
+                        retText = tPath.has(p) ? tPath(p) : "";
                     }
                 }
                 if (pathName.split("/").length - 1 == i && !customText) {
                     setTitle(p);
-                    retText = tPath(p);
+                    retText = tPath.has(p) ? tPath(p) : "";
                 }
                 return {
                     className: "line-clamp-1",
@@ -70,7 +70,7 @@ function DashboardNavbar() {
             <div className="flex-1">
                 <Breadcrumb items={breadCrumb} />
                 <Typography.Title style={{margin: 0}} className="line-clamp-1">
-                    {customText ?? tPath(title)}
+                    {customText ?? (tPath.has(title) && tPath(title))}
                 </Typography.Title>
             </div>
             <Notifications />
